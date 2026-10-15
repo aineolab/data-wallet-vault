@@ -2,7 +2,7 @@
 # Data Wallet demo: mint an owner token + a coding-only consumer token, register both in Claude Code, print the demo prompts.
 # Run on the Mac:  bash scripts/demo-connect.sh
 set -euo pipefail
-URL="${WALLET_URL:-https://data-wallet-server-nyolab.vercel.app}"
+URL="${WALLET_URL:-https://data-wallet-server-five.vercel.app}"
 OUT="server/.tokens"; umask 077
 mint() { curl -sS "$URL/v1/tokens/issue" -H 'content-type: application/json' -d "$1" | python3 -c 'import sys,json;d=json.load(sys.stdin);print(d.get("token") or sys.exit("mint failed: "+json.dumps(d)))'; }
 OWNER=$(mint '{"consumer_name":"Tim — Claude Code (owner)","consumer_type":"OWNER","scopes":["work_profile","coding_preferences","shopping_preferences","personal_memory"]}')

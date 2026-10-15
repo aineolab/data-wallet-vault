@@ -43,7 +43,7 @@ cd agents && npm install && npm run normalizer
 | `NORMALIZER_AGENT_ID` | `claude-lock.json` → `resources["./agents/normalizer.md"].id` |
 | `WALLET_ENV_ID` | `claude-lock.json` → `resources["./environments/wallet-cloud.yaml"].id` |
 | `WALLET_VAULT_ID` | the vault holding `WALLET_DATA_IN_TOKEN` |
-| `PUBLIC_URL` | the wallet server origin, e.g. `https://data-wallet-server.vercel.app` |
+| `PUBLIC_URL` | the wallet server origin, e.g. `https://data-wallet-server-five.vercel.app` |
 | `WALLET_RAW_FILE_ID` | `raw_vault_files.id` the facts attach to, from `POST /v1/ingest` |
 | `ANTHROPIC_API_KEY` (+ `ANTHROPIC_WORKSPACE_ID` for org-scoped keys) | your Anthropic account, or an `ant auth login` profile |
 

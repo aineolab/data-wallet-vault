@@ -16,8 +16,8 @@
     "./environments/wallet-cloud.yaml": {
       "kind": "environment",
       "id": "env_01Eez85w96evhM5ACnAPn8oj",
-      "hash": "4e4a669b94a19002b1a2c7d155ebaf26",
-      "remote_hash": "bb0e1344a6f5004d86d46a90e05ed395"
+      "hash": "51cd82e9c38b3a34034c255864db12b3",
+      "remote_hash": "21a155346af8e9950740a5730e044ba1"
     }
   }
 }

@@ -1,7 +1,7 @@
 # Demo script (pitch 16:00, 15 Oct 2026)
 
 Six steps, about seven minutes on stage. Rehearse twice. Everything runs against
-`https://data-wallet-server.vercel.app` with `MOCK_LINKEDIN=1`. Two chat windows: **Claude** connected with the
+`https://data-wallet-server-five.vercel.app` with `MOCK_LINKEDIN=1`. Two chat windows: **Claude** connected with the
 owner token, and **ChatGPT** (or a second Claude chat) connected with a `coding_preferences`-only consumer token.
 
 **Say aloud, early:** the user is synthetic ("Dana Whitfield"), the export is seeded, the tests are ours.
@@ -13,15 +13,15 @@ owner token, and **ChatGPT** (or a second Claude chat) connected with a `coding_
 
 | Check | Command | Expect |
 |---|---|---|
-| Server up | `curl -s https://data-wallet-server.vercel.app/health` | `"ok":true,"db":"ok"` |
-| Both tool sets | `curl -s https://data-wallet-server.vercel.app/mcp/health` | 12 owner tools, 2 consumer tools |
+| Server up | `curl -s https://data-wallet-server-five.vercel.app/health` | `"ok":true,"db":"ok"` |
+| Both tool sets | `curl -s https://data-wallet-server-five.vercel.app/mcp/health` | 12 owner tools, 2 consumer tools |
 | Claude owner connector | `claude mcp list` or claude.ai Connectors | Connected |
 | ChatGPT consumer connector | ask it "what tools do you have from the wallet?" | `wallet_search_memories`, `wallet_get_identity_card` |
-| Cron ticking | `curl -s -X POST https://data-wallet-server.vercel.app/v1/jobs/tick` | `{"now":…,"checked":N}` |
+| Cron ticking | `curl -s -X POST https://data-wallet-server-five.vercel.app/v1/jobs/tick` | `{"now":…,"checked":N}` |
 | Fresh LinkedIn run possible | run the SQL in `server/INTEGRATION.md` (linkedin lane, note 2) if a previous import exists | job summary shows `deduplicated:false` (cosmetic; `true` is fine too) |
 | Dashboard | open the Lovable app, Settings → paste the owner token | Statement tab shows today's rows |
 
-Keep a terminal open with `export U=https://data-wallet-server.vercel.app` and the owner token in `$OT`. That terminal
+Keep a terminal open with `export U=https://data-wallet-server-five.vercel.app` and the owner token in `$OT`. That terminal
 is the fallback for every step.
 
 ## Step 0: LinkedIn into the wallet (0:00, runs while you talk)

@@ -7,4 +7,4 @@ config:
     type: limited
     allow_package_managers: false
     allowed_hosts:
-      - data-wallet-server.vercel.app
+      - data-wallet-server-five.vercel.app

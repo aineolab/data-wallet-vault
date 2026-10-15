@@ -1,6 +1,6 @@
 // End-to-end OAuth check the way claude.ai does it: discovery -> DCR -> consent (POST the form) -> token (PKCE)
 // -> MCP tools/list with the bearer -> refresh rotation -> old bearer rejected.
-//   WALLET_URL=https://data-wallet-server.vercel.app OWNER_PASSPHRASE=... npx tsx scripts/oauth-e2e.ts [owner|consumer]
+//   WALLET_URL=https://data-wallet-server-five.vercel.app OWNER_PASSPHRASE=... npx tsx scripts/oauth-e2e.ts [owner|consumer]
 import { createHash, randomBytes } from 'node:crypto'
 
 const BASE = (process.env.WALLET_URL ?? 'http://localhost:3000').replace(/\/+$/, '')

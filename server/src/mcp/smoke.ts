@@ -13,7 +13,7 @@ import { ALL_SCOPES } from '../scopes.js'
 import { CONSUMER_TOOLS, OWNER_TOOLS } from './tools.js'
 
 const base = (process.argv[2] ?? 'http://localhost:3003').replace(/\/+$/, '')
-const PUBLIC = 'https://data-wallet-server.vercel.app'
+const PUBLIC = 'https://data-wallet-server-five.vercel.app'
 let failures = 0
 
 function check(name: string, ok: boolean, detail?: unknown) {

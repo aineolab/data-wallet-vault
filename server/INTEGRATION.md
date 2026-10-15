@@ -79,7 +79,7 @@ Dependency added to `server/package.json`: `fflate` (zip parsing).
 ### exposure lane (branch `lane-exposure`, feature 13) — no core changes needed, five notes
 Files: `src/exposure/{mockweb,scan,requests}.ts`, `src/v1/exposure.ts`, `public/seed/exposure/web_index.json` (static copy of
 `seed/out/exposure/web_index.json` for Vercel). `eval/exposure_flow.py` 19/19 locally (MOCK_WEB=1, real Supabase DB).
-1. **Vercel env:** set `MOCK_WEB_SEED_URL=https://data-wallet-server.vercel.app/seed/exposure` (the mock fetches
+1. **Vercel env:** set `MOCK_WEB_SEED_URL=https://data-wallet-server-five.vercel.app/seed/exposure` (the mock fetches
    `${MOCK_WEB_SEED_URL}/web_index.json` first, then local paths: repo `seed/out/exposure`, `server/public/seed/exposure`,
    or `MOCK_WEB_SEED_DIR`). If `seed/out/exposure/web_index.json` ever changes, re-copy it to `server/public/seed/exposure/`.
 2. **Owner identifiers are auto-seeded in mock mode.** The eval never seeds `owner_identifiers` through the API, so with

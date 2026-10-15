@@ -57,7 +57,7 @@ The database is the only thing that enforces scope: `scope_category = ANY($scope
 Against the live demo server. Owner routes need no `Authorization` header today (demo mode, single synthetic owner).
 
 ```bash
-export U=https://data-wallet-server.vercel.app
+export U=https://data-wallet-server-five.vercel.app
 ```
 
 Grant ChatGPT one category and ask a coding question (served) and a money question (blocked):

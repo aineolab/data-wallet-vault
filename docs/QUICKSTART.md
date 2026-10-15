@@ -6,11 +6,11 @@ facts were seeded. Owner routes need no `Authorization` header today (demo mode,
 the consumer's bearer token.
 
 ```bash
-export U=https://data-wallet-server.vercel.app
+export U=https://data-wallet-server-five.vercel.app
 curl -s $U/health
 ```
 ```json
-{"ok":true,"db":"ok","tables":14,"migrations":["20261015000001","20261015000002","20261015000003","20261015000004"],"mock":{"linkedin":true,"web":true},"public_url":"https://data-wallet-server.vercel.app"}
+{"ok":true,"db":"ok","tables":14,"migrations":["20261015000001","20261015000002","20261015000003","20261015000004"],"mock":{"linkedin":true,"web":true},"public_url":"https://data-wallet-server-five.vercel.app"}
 ```
 
 Scopes: `work_profile`, `coding_preferences`, `shopping_preferences`, `personal_memory`, `health_finance_restricted`.
@@ -178,15 +178,15 @@ data never enters the wallet. `deduplicated: true` means the archive's sha256 ma
 One endpoint; the tool list depends on the token. Add the wallet twice to see the difference:
 
 ```bash
-claude mcp add --transport http wallet-owner https://data-wallet-server.vercel.app/mcp --header "Authorization: Bearer <OWNER_TOKEN>"
-claude mcp add --transport http wallet-coding https://data-wallet-server.vercel.app/mcp --header "Authorization: Bearer <CONSUMER_TOKEN>"
+claude mcp add --transport http wallet-owner https://data-wallet-server-five.vercel.app/mcp --header "Authorization: Bearer <OWNER_TOKEN>"
+claude mcp add --transport http wallet-coding https://data-wallet-server-five.vercel.app/mcp --header "Authorization: Bearer <CONSUMER_TOKEN>"
 claude mcp list
 ```
 ```
-Added HTTP MCP server wallet-owner with URL: https://data-wallet-server.vercel.app/mcp to local config
-Added HTTP MCP server wallet-coding with URL: https://data-wallet-server.vercel.app/mcp to local config
-wallet-owner: https://data-wallet-server.vercel.app/mcp (HTTP) - ✔ Connected
-wallet-coding: https://data-wallet-server.vercel.app/mcp (HTTP) - ✔ Connected
+Added HTTP MCP server wallet-owner with URL: https://data-wallet-server-five.vercel.app/mcp to local config
+Added HTTP MCP server wallet-coding with URL: https://data-wallet-server-five.vercel.app/mcp to local config
+wallet-owner: https://data-wallet-server-five.vercel.app/mcp (HTTP) - ✔ Connected
+wallet-coding: https://data-wallet-server-five.vercel.app/mcp (HTTP) - ✔ Connected
 ```
 
 What each one sees (`tools/list` over the same endpoint with each token):
