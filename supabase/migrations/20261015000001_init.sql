@@ -1,7 +1,7 @@
 -- Data Wallet — self-hosted schema (v0.1, hackathon slice of PRD §2.2)
 -- Single-user by default. tenant_id kept everywhere so multi-tenant is a config change later.
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE EXTENSION IF NOT EXISTS "vector";
+CREATE EXTENSION IF NOT EXISTS "vector" WITH SCHEMA extensions;  -- Supabase pre-creates `extensions` and keeps it on search_path
 
 CREATE TABLE IF NOT EXISTS tenants (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
