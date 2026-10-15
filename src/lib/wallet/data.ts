@@ -5,7 +5,7 @@ export type Exposure = { id: string; site?: string; site_name?: string; type?: s
 export type PrivacyRequest = { id: string; exposure_id?: string; site?: string; site_name?: string; status: string; due_at?: string; due_date?: string; request_type?: string };
 export type WalletData = { entries: LedgerEntry[]; connections: Connection[]; jobs: Job[]; exposures: Exposure[]; requests: PrivacyRequest[]; live: boolean; error?: string };
 export const emptyWallet: WalletData = { entries: [], connections: [], jobs: [], exposures: [], requests: [], live: false };
-export const configuredUrl = (import.meta.env.VITE_WALLET_URL ?? '').trim().replace(/\/+$/, '');
+export const configuredUrl = (import.meta.env['VITE_WALLET_URL'] ?? '').trim().replace(/\/+$/, '');
 export const scopeNames: Record<string, string> = { work_profile: 'Work profile', coding_preferences: 'Coding preferences', shopping_preferences: 'Shopping preferences', personal_memory: 'Personal memory', health_finance_restricted: 'Health & money (never shared by default)' };
 export function makeDemoData(): WalletData {
   const now = Date.now();
