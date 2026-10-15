@@ -22,7 +22,7 @@ export function WalletDashboard({ tab, onTabChange }: { tab: Tab; onTabChange: (
   const [credentials, setCredentials] = useState({ url: configuredUrl, token: '' });
   const [ready, setReady] = useState(false);
   const [settings, setSettings] = useState(false);
-  const [draftUrl, setDraftUrl] = useState(configuredUrl);
+  const [draftUrl, setDraftUrl] = useState(configuredUrl || 'https://data-wallet-server-nyolab.vercel.app');
   const [draftToken, setDraftToken] = useState('');
   const [testState, setTestState] = useState('');
   const [testing, setTesting] = useState(false);
@@ -40,9 +40,9 @@ export function WalletDashboard({ tab, onTabChange }: { tab: Tab; onTabChange: (
     setReady(true);
   }, []);
   const liveQuery = useQuery({ queryKey: ['wallet-live', credentials.url], queryFn: () => fetchWallet(credentials.url, credentials.token), enabled: ready && Boolean(configuredUrl && credentials.token), refetchInterval: 3000, refetchIntervalInBackground: true, retry: false });
-  const data: WalletData = configuredUrl ? liveQuery.data ?? initialData : demo;
-  const isLive = Boolean(configuredUrl && data.live && credentials.token);
-  const disconnected = Boolean(configuredUrl && !isLive);
+  const isLive = Boolean(configuredUrl && credentials.token && liveQuery.data?.live);
+  const data: WalletData = isLive && liveQuery.data ? liveQuery.data : demo;
+  const disconnected = false;
   const activeCount = data.connections.filter(c => !c.is_revoked).length;
   const blockedCount = data.entries.filter(e => /block|denied/i.test(e.operation)).length;
   const pendingCount = data.requests.filter(r => !['completed', 'data received'].includes(r.status.toLowerCase())).length;
@@ -50,14 +50,18 @@ export function WalletDashboard({ tab, onTabChange }: { tab: Tab; onTabChange: (
   async function testConnection() {
     setTesting(true); setTestState('');
     try {
-      if (!draftToken.trim()) throw new Error('Paste your owner token first.');
       const url = validateWalletUrl(draftUrl);
+      const res = await fetch(`${url}/health`, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(10000), cache: 'no-store' });
+      if (!res.ok) throw new Error(`Health check failed (${res.status}).`);
+      const health = await res.json() as { ok?: unknown; db?: unknown; tables?: unknown };
+      const summary = `ok: ${String(health.ok)} · db: ${String(health.db ?? '—')} · tables: ${String(health.tables ?? '—')}`;
+      if (!draftToken.trim()) { setTestState(`${summary}. Paste your owner token to go live.`); return; }
       await walletRequest(url, draftToken.trim(), '/v1/ledger');
       sessionStorage.setItem('wallet-owner-token', draftToken.trim());
       sessionStorage.setItem('wallet-server-url', url);
       queryClient.removeQueries({ queryKey: ['wallet-live'] });
       setCredentials({ url, token: draftToken.trim() });
-      setTestState(configuredUrl ? 'Connected. Owner token accepted.' : 'Owner token accepted. Demo data remains active until VITE_WALLET_URL is configured.');
+      setTestState(`${summary}. Owner token accepted.`);
     } catch (error) { setTestState(error instanceof Error && error.name !== 'TypeError' ? error.message : 'Could not reach your wallet. Check its URL and connection permissions.'); }
     finally { setTesting(false); }
   }
@@ -68,7 +72,7 @@ export function WalletDashboard({ tab, onTabChange }: { tab: Tab; onTabChange: (
   async function revoke(connection: Connection) {
     setRevoking(connection.token_id); setRevokeError('');
     try {
-      if (configuredUrl) {
+      if (isLive) {
         await walletRequest(credentials.url, credentials.token, `/v1/tokens/${encodeURIComponent(connection.token_id)}`, 'DELETE');
         queryClient.setQueryData<WalletData>(['wallet-live', credentials.url], old => old ? { ...old, connections: old.connections.map(c => c.token_id === connection.token_id ? { ...c, is_revoked: true } : c) } : old);
         await liveQuery.refetch();
@@ -88,18 +92,18 @@ export function WalletDashboard({ tab, onTabChange }: { tab: Tab; onTabChange: (
     </header>
     <div className="mx-auto max-w-[1440px] px-5 pb-10 md:px-10">
       <section className="intro-section">
-        <div className="flex flex-wrap items-center gap-3"><span className="eyebrow">DANA WHITFIELD’S WALLET</span><span className={cn('status-pill', disconnected && 'status-disconnected')}><span className="status-dot" />{isLive ? 'Live' : configuredUrl ? 'Not connected' : 'Demo data'}</span></div>
+        <div className="flex flex-wrap items-center gap-3"><span className="eyebrow">DANA WHITFIELD’S WALLET</span><span className={cn('status-pill', disconnected && 'status-disconnected')}><span className="status-dot" />{isLive ? 'Live' : 'Demo data'}</span></div>
         <h1 className="mt-5 text-4xl font-medium md:text-5xl">Your data lives here.<br className="sm:hidden" /> <span className="text-muted-foreground">Your AIs ask; you decide.</span></h1>
         <div className="mt-5 flex items-center gap-2 text-sm text-muted-foreground"><ShieldCheck size={16} className="text-primary" /><span>Private by default. Shared on your terms.</span></div>
       </section>
-      {disconnected && <div role="alert" className="connection-alert"><LockKeyhole size={20} /><span>{data.error || (credentials.token ? 'Connecting to your wallet…' : 'Add your owner token in Settings to connect to your wallet.')}</span><Button variant="outline" onClick={() => setSettings(true)}>Settings <ArrowRight /></Button></div>}
+      {!isLive && <div role="status" className="connection-alert"><LockKeyhole size={20} /><span>{credentials.token && liveQuery.isFetching && !liveQuery.data ? 'Connecting to your wallet…' : 'Paste your owner token in Settings to go live'}</span><Button variant="outline" onClick={() => setSettings(true)}>Settings <ArrowRight /></Button></div>}
       <section className="summary-strip" aria-label="Wallet overview">
         <Summary icon={Activity} label="Wallet activity" value={data.entries.length} detail="reads & events" />
         <Summary icon={Link2} label="Connections" value={activeCount} detail="with access" />
         <Summary icon={LockKeyhole} label="Requests blocked" value={blockedCount} detail="boundaries held" accent />
         <Summary icon={Globe2} label="Privacy requests" value={pendingCount} detail="in progress" />
       </section>
-      <nav className="tab-bar" aria-label="Wallet tabs"><div className="tab-items" role="tablist">{tabs.map(t => <Button key={t.id} role="tab" id={`tab-${t.id}`} aria-selected={tab === t.id} aria-controls={`panel-${t.id}`} variant="ghost" className={cn('wallet-tab', tab === t.id && 'wallet-tab-active')} onClick={() => onTabChange(t.id)}><t.icon size={19} />{t.label}{t.id === 'connections' && <span className="tab-count">{data.connections.length}</span>}</Button>)}</div><span className="hidden items-center gap-2 text-xs text-muted-foreground lg:flex"><span className={cn('status-dot', !isLive && 'dot-muted')} />{isLive ? 'Updating every 3 seconds' : configuredUrl ? 'Awaiting connection' : 'Demo workspace'}</span></nav>
+      <nav className="tab-bar" aria-label="Wallet tabs"><div className="tab-items" role="tablist">{tabs.map(t => <Button key={t.id} role="tab" id={`tab-${t.id}`} aria-selected={tab === t.id} aria-controls={`panel-${t.id}`} variant="ghost" className={cn('wallet-tab', tab === t.id && 'wallet-tab-active')} onClick={() => onTabChange(t.id)}><t.icon size={19} />{t.label}{t.id === 'connections' && <span className="tab-count">{data.connections.length}</span>}</Button>)}</div><span className="hidden items-center gap-2 text-xs text-muted-foreground lg:flex"><span className={cn('status-dot', !isLive && 'dot-muted')} />{isLive ? 'Updating every 3 seconds' : 'Demo workspace'}</span></nav>
       <div role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`} className="tab-panel">
         {tab === 'statement' && <>
           <SectionHeading title="Your wallet statement" subtitle="Every request. Every decision. Nothing behind your back." aside={<span className="text-sm text-muted-foreground">{data.entries.length} events <span className="mx-2 text-border">/</span> Newest first</span>} />
@@ -110,7 +114,7 @@ export function WalletDashboard({ tab, onTabChange }: { tab: Tab; onTabChange: (
               <div className="ledger-scopes"><Scopes scopes={entry.scopes_requested} /><ArrowRight className="shrink-0 text-muted-foreground" size={14} />{blocked ? <span className="flex items-center gap-1.5 text-sm text-warning"><LockKeyhole size={13} />Nothing shared</span> : <Scopes scopes={entry.scopes_served} />}</div>
               <div className="ledger-records"><span className={cn('text-xl font-medium', blocked && 'text-warning')}>{entry.records_returned}</span><span className="text-xs text-muted-foreground sm:hidden"> records</span></div>
             </div>; })}
-          </div>{!data.entries.length && <EmptyState label={configuredUrl ? 'No wallet events to show.' : 'No activity yet.'} />}
+          </div>{!data.entries.length && <EmptyState label={isLive ? 'No wallet events to show.' : 'No activity yet.'} />}
           <div className="mt-5 flex items-center gap-2 text-xs text-muted-foreground"><Fingerprint size={15} /><span>A record of access, not a copy of your personal data.</span></div>
         </>}
         {tab === 'connections' && <>
@@ -131,9 +135,9 @@ export function WalletDashboard({ tab, onTabChange }: { tab: Tab; onTabChange: (
           <div className="exposure-wrap"><table className="exposure-table"><thead><tr>{['SITE / TYPE', 'WHAT IT SHOWS', 'RISK / CONFIDENCE', 'RECOMMENDED ACTION', 'REQUEST STATUS'].map(h => <th key={h}>{h}</th>)}</tr></thead><tbody>{data.exposures.map(e => { const site = e.site ?? e.site_name ?? 'Unknown site'; const request = data.requests.find(r => r.exposure_id === e.id || (r.site ?? r.site_name) === site); const risk = (e.risk ?? e.risk_level ?? 'low').toLowerCase(); const namesake = e.is_namesake || String(e.confidence).toLowerCase().includes('not you'); return <tr key={e.id}><td><p className="font-semibold">{site}</p><p className="mt-1 text-sm text-muted-foreground">{e.type ?? e.exposure_type}</p></td><td><div className="flex flex-wrap gap-1.5">{(e.data_shown ?? e.data_types ?? []).map(s => <span key={s} className="scope-chip">{s}</span>)}</div></td><td><span className={cn('risk-badge', risk === 'high' ? 'risk-high' : risk === 'medium' ? 'risk-medium' : 'risk-low')}><span className="status-dot" />{pretty(risk)}</span><p className="mt-2 text-xs text-muted-foreground">{namesake ? 'Namesake · probably not you' : typeof e.confidence === 'number' ? `${Math.round(e.confidence <= 1 ? e.confidence * 100 : e.confidence)}% match` : e.confidence}</p></td><td><span className="text-sm">{e.recommended_action ?? '—'}</span></td><td>{request ? <><span className={cn('request-status', /overdue|escalated/i.test(request.status) && 'text-destructive')}><span className="status-dot" />{pretty(request.status)}</span><p className="mt-2 text-xs text-muted-foreground">{request.request_type && `${pretty(request.request_type)}${request.due_at || request.due_date ? ' · ' : ''}`}{request.due_at || request.due_date ? `Due ${formatDate(request.due_at ?? request.due_date)}` : 'No due date'}</p></> : <span className="text-sm text-muted-foreground">{namesake ? 'No action' : 'Monitoring'}</span>}</td></tr>; })}</tbody></table></div>{!data.exposures.length && <EmptyState label="No online exposures to show." />}
         </>}
       </div>
-      <footer className="wallet-footer"><span className="flex items-center gap-2"><ShieldCheck size={16} />Your wallet. Your rules.</span><span>{configuredUrl ? 'Data Wallet owner console' : 'Fictional data · Dana Whitfield'}</span></footer>
+      <footer className="wallet-footer"><span className="flex items-center gap-2"><ShieldCheck size={16} />Your wallet. Your rules.</span><span>{isLive ? 'Data Wallet owner console' : 'Fictional data · Dana Whitfield'}</span></footer>
     </div>
-    <Dialog open={settings} onOpenChange={setSettings}><DialogContent className="w-[calc(100%-2rem)] max-w-xl"><DialogHeader><DialogTitle className="text-2xl">Wallet settings</DialogTitle><DialogDescription>Your connection to the wallet server.</DialogDescription></DialogHeader><label className="mt-3 text-sm font-medium" htmlFor="wallet-url">Wallet server URL</label><input className="wallet-input" id="wallet-url" type="url" value={draftUrl} onChange={e => setDraftUrl(e.target.value)} placeholder="https://your-wallet-server.vercel.app" autoComplete="off" /><label className="text-sm font-medium" htmlFor="owner-token">Owner token</label><input className="wallet-input" id="owner-token" type="password" value={draftToken} onChange={e => setDraftToken(e.target.value)} placeholder="Paste your owner token" autoComplete="off" /><p className="text-sm text-muted-foreground">Kept only for this browser session. Never stored permanently.</p>{!configuredUrl && <p className="text-sm text-warning">Demo data is active. Configure VITE_WALLET_URL to use live wallet data.</p>}{testState && <p role="status" className="text-sm">{testState}</p>}<div className="mt-3 flex flex-wrap justify-between gap-3"><Button variant="ghost" onClick={clearToken}>Clear token</Button><Button className="h-11 text-base" disabled={testing} onClick={testConnection}>{testing ? <RefreshCw className="animate-spin" /> : <Link2 />}{testing ? 'Testing…' : 'Test connection'}</Button></div></DialogContent></Dialog>
+    <Dialog open={settings} onOpenChange={setSettings}><DialogContent className="w-[calc(100%-2rem)] max-w-xl"><DialogHeader><DialogTitle className="text-2xl">Wallet settings</DialogTitle><DialogDescription>Your connection to the wallet server.</DialogDescription></DialogHeader><label className="mt-3 text-sm font-medium" htmlFor="wallet-url">Wallet server URL</label><input className="wallet-input" id="wallet-url" type="url" value={draftUrl} onChange={e => setDraftUrl(e.target.value)} placeholder="https://your-wallet-server.vercel.app" autoComplete="off" /><label className="text-sm font-medium" htmlFor="owner-token">Owner token</label><input className="wallet-input" id="owner-token" type="password" value={draftToken} onChange={e => setDraftToken(e.target.value)} placeholder="Paste your owner token" autoComplete="off" /><p className="text-sm text-muted-foreground">Kept only for this browser session. Never stored permanently.</p>{!isLive && <p className="text-sm text-warning">Demo data is active until your owner token is accepted.</p>}{testState && <p role="status" className="text-sm">{testState}</p>}<div className="mt-3 flex flex-wrap justify-between gap-3"><Button variant="ghost" onClick={clearToken}>Clear token</Button><Button className="h-11 text-base" disabled={testing} onClick={testConnection}>{testing ? <RefreshCw className="animate-spin" /> : <Link2 />}{testing ? 'Testing…' : 'Test connection'}</Button></div></DialogContent></Dialog>
   </main>;
 }
 function Summary({ icon: Icon, label, value, detail, accent = false }: { icon: typeof Activity; label: string; value: number; detail: string; accent?: boolean }) { return <div className="summary-item"><div className="flex items-center gap-2 text-sm text-muted-foreground"><Icon size={17} />{label}</div><div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1"><span className={cn('text-3xl font-medium md:text-4xl', accent && 'text-warning')}>{value.toString().padStart(2, '0')}</span><span className="text-xs text-muted-foreground md:text-sm">{detail}</span></div></div>; }
