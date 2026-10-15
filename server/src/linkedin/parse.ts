@@ -258,6 +258,7 @@ export function distil(snap: Snapshot, prefix = 'linkedin'): Distilled {
 // ---------- drift: wallet snapshot vs live snapshot, per domain ----------
 
 export interface DomainDrift {
+  details?: unknown[]
   added?: unknown[]
   removed?: unknown[]
   changed?: unknown[]
@@ -270,11 +271,12 @@ export interface DomainDrift {
 export function diffDistilled(before: Distilled, after: Distilled): Record<Domain, DomainDrift> {
   const out = {} as Record<Domain, DomainDrift>
 
-  const profileKeys = ['full_name', 'headline', 'summary', 'industry', 'location']
-  const changedProfile = profileKeys
-    .filter((k) => (before.identity_card[k] ?? '') !== (after.identity_card[k] ?? ''))
-    .map((k) => ({ field: k, before: before.identity_card[k] ?? '', after: after.identity_card[k] ?? '' }))
-  out.PROFILE = changedProfile.length ? { changed: changedProfile } : { unchanged: true }
+  // PROFILE: report the export's own field names (Headline, Summary, ...) so zip and API drift read the same.
+  const profileFields: [string, string][] = [['full_name', 'Name'], ['headline', 'Headline'], ['summary', 'Summary'], ['industry', 'Industry'], ['location', 'Geo Location']]
+  const profileDetails = profileFields
+    .filter(([k]) => (before.identity_card[k] ?? '') !== (after.identity_card[k] ?? ''))
+    .map(([k, field]) => ({ field, before: before.identity_card[k] ?? '', after: after.identity_card[k] ?? '' }))
+  out.PROFILE = profileDetails.length ? { changed: profileDetails.map((d) => d.field), details: profileDetails } : { unchanged: true }
 
   const posKey = (p: Position) => `${p.company}|${p.started_on ?? ''}`
   const bPos = before.work_history.filter((w): w is Position => w.kind === 'position')

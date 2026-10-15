@@ -464,14 +464,17 @@ async function writeProfile(q: Q, job: JobRow, d: Distilled, rawFileId: string) 
   )
 }
 
-/** Skills -> work_profile facts with provenance linkedin:Skills.csv#row. Re-import of the same archive adds nothing. */
+/**
+ * Skills -> work_profile facts with provenance linkedin:Skills.csv#row. The archive is authoritative for LinkedIn
+ * skills: previous LinkedIn skill facts are replaced, so a re-import (or an import after apply-drift) never leaves stale rows.
+ */
 async function writeSkills(q: Q, job: JobRow, d: Distilled, rawFileId: string): Promise<number> {
+  await q.query(`DELETE FROM canonical_memories WHERE tenant_id = $1 AND user_id = $2 AND source_provenance_ref LIKE 'linkedin:Skills.csv#%'`, [job.tenant_id, job.user_id])
   let n = 0
   for (const s of d.skills) {
     const { rowCount } = await q.query(
       `INSERT INTO canonical_memories (tenant_id, user_id, raw_file_id, scope_category, fact_assertion, confidence_score, source_provider, source_provenance_ref, modality)
-       SELECT $1, $2, $3, $4, $5, 1.00, $6, $7, 'text'
-        WHERE NOT EXISTS (SELECT 1 FROM canonical_memories WHERE user_id = $2 AND source_provenance_ref = $7 AND fact_assertion = $5)`,
+       VALUES ($1, $2, $3, $4, $5, 1.00, $6, $7, 'text')`,
       [job.tenant_id, job.user_id, rawFileId, s.category, s.fact, job.provider, s.provenance],
     )
     n += rowCount ?? 0

@@ -94,11 +94,11 @@ export async function driftCheck(tenantId: string = OWNER.tenantId, userId: stri
   })
   return {
     source,
-    domains_requested: ALLOWLIST,
+    requested_domains: ALLOWLIST,
     checked_at: new Date().toISOString(),
     in_sync: changed.length === 0,
     domains_changed: changed,
-    drift,
+    domains: drift,
     note: 'Read-only. Nothing was changed. Call wallet_linkedin_apply_drift (POST /v1/sources/linkedin/apply-drift) to apply.',
   }
 }
@@ -167,5 +167,5 @@ export async function applyDrift(tenantId: string = OWNER.tenantId, userId: stri
     recordsReturned: after.skills.length,
     detail: { domains: ALLOWLIST, drift },
   })
-  return { source, applied_at: new Date().toISOString(), drift, summary: after.counts }
+  return { source, applied_at: new Date().toISOString(), domains: drift, summary: after.counts }
 }
