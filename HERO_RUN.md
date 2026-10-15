@@ -40,6 +40,30 @@ Pitch is at 16:00. **Hard stop for new features: 14:30.**
 - **Feature 13:** Exposure Finder on the mock web (MOCK_WEB=1). Owner-only, verified identifiers only, robots.txt
   respected, drafts never sent. Green when `python3 eval/exposure_flow.py` passes.
 
+## Parallel plan (use subagents; one integrator)
+**Stage 0, solo, ~15 min:** scaffold `server/` with the shared core and deploy it empty-but-healthy. The core is
+`src/index.ts` (routes mount), `src/db.ts` (pg pool), `src/auth.ts` (bearer → token row, owner/consumer), `src/ledger.ts`
+(append a row), `src/scopes.ts` (the SQL scope filter). Nothing else goes in the core. Once `GET /health` is live on Vercel,
+fan out.
+
+**Stage 1, five subagents in parallel (git worktrees, one branch each, each owns ONE folder):**
+| Subagent | Owns | Done when |
+|---|---|---|
+| mcp | `server/src/mcp/` (tools, tools/list filtering) | consumer tools answer through Claude Code bearer; owner tools listed |
+| wallet-api | `server/src/v1/` (tokens, memories/query, profile, ledger, connections, revoke, ship, CORS) | `eval/redteam.py` passes |
+| linkedin | `server/src/linkedin/` (mock provider, parser, job state machine, tick) + `/v1/jobs*`, `/v1/sources/linkedin/*` | `eval/linkedin_flow.py` passes |
+| exposure | `server/src/exposure/` (mock web, scan, drafts, request state machine) + `/v1/exposure*`, `/v1/privacy-requests*` | `eval/exposure_flow.py` passes |
+| normalizer | `agents/normalizer/` + `server/src/scrub.ts` + `/v1/facts` | first `eval/score.py` score recorded, then hill-climb |
+Rules for subagents: touch only your folder plus your own route file under `src/v1/`; never edit the core; if you need a
+core change, write it as a request in `server/INTEGRATION.md` and the integrator applies it. Run your eval locally against
+`vercel dev` or the deployed URL. Commit small; push your branch.
+
+**Integrator (the main session):** merges each branch into `scaffold` as its eval goes green, redeploys, reruns all evals,
+and applies core-change requests. Also runs the independent graders on NYO in the background (`eval/judge.py injections`
+once the API is up, `facts` after the normalizer's first run, `drafts` after exposure is green), so grading never blocks a lane.
+
+Order of merging if they finish together: wallet-api → mcp → linkedin → exposure → normalizer.
+
 ## Rules
 - Work on branch `scaffold`. Commit small, push often. Never force-push. Never touch the Lovable app (`src/`, `public/`).
 - Never edit `seed/out/*` or `eval/*.py` to make a test pass.
