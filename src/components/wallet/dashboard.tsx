@@ -40,9 +40,9 @@ export function WalletDashboard({ tab, onTabChange }: { tab: Tab; onTabChange: (
     setReady(true);
   }, []);
   const liveQuery = useQuery({ queryKey: ['wallet-live', credentials.url], queryFn: () => fetchWallet(credentials.url, credentials.token), enabled: ready && Boolean(configuredUrl && credentials.token), refetchInterval: 3000, refetchIntervalInBackground: true, retry: false });
-  const data: WalletData = configuredUrl ? liveQuery.data ?? initialData : demo;
-  const isLive = Boolean(configuredUrl && data.live && credentials.token);
-  const disconnected = Boolean(configuredUrl && !isLive);
+  const isLive = Boolean(configuredUrl && credentials.token && liveQuery.data?.live);
+  const data: WalletData = isLive && liveQuery.data ? liveQuery.data : demo;
+  const disconnected = false;
   const activeCount = data.connections.filter(c => !c.is_revoked).length;
   const blockedCount = data.entries.filter(e => /block|denied/i.test(e.operation)).length;
   const pendingCount = data.requests.filter(r => !['completed', 'data received'].includes(r.status.toLowerCase())).length;
@@ -50,14 +50,18 @@ export function WalletDashboard({ tab, onTabChange }: { tab: Tab; onTabChange: (
   async function testConnection() {
     setTesting(true); setTestState('');
     try {
-      if (!draftToken.trim()) throw new Error('Paste your owner token first.');
       const url = validateWalletUrl(draftUrl);
+      const res = await fetch(`${url}/health`, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(10000), cache: 'no-store' });
+      if (!res.ok) throw new Error(`Health check failed (${res.status}).`);
+      const health = await res.json() as { ok?: unknown; db?: unknown; tables?: unknown };
+      const summary = `ok: ${String(health.ok)} · db: ${String(health.db ?? '—')} · tables: ${String(health.tables ?? '—')}`;
+      if (!draftToken.trim()) { setTestState(`${summary}. Paste your owner token to go live.`); return; }
       await walletRequest(url, draftToken.trim(), '/v1/ledger');
       sessionStorage.setItem('wallet-owner-token', draftToken.trim());
       sessionStorage.setItem('wallet-server-url', url);
       queryClient.removeQueries({ queryKey: ['wallet-live'] });
       setCredentials({ url, token: draftToken.trim() });
-      setTestState(configuredUrl ? 'Connected. Owner token accepted.' : 'Owner token accepted. Demo data remains active until VITE_WALLET_URL is configured.');
+      setTestState(`${summary}. Owner token accepted.`);
     } catch (error) { setTestState(error instanceof Error && error.name !== 'TypeError' ? error.message : 'Could not reach your wallet. Check its URL and connection permissions.'); }
     finally { setTesting(false); }
   }
