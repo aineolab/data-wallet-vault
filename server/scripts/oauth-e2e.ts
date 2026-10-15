@@ -71,8 +71,8 @@ async function main() {
   const list = await mcp(t.access_token, { jsonrpc: '2.0', id: 1, method: 'tools/list', params: {} })
   const names: string[] = list.status === 200 ? list.json.result.tools.map((x: { name: string }) => x.name) : []
   check(`tools/list as ${ROLE}`, ROLE === 'owner' ? names.includes('wallet_statement') : names.length === 2 && names.includes('wallet_search_memories'), JSON.stringify(list.json).slice(0, 200))
-  const search = await mcp(t.access_token, { jsonrpc: '2.0', id: 2, method: 'tools/call', params: { name: ROLE === 'owner' ? 'wallet_search' : 'wallet_search_memories', arguments: { query: 'indentation' } } })
-  check('search returns the indentation fact', search.status === 200 && /two-space/.test(JSON.stringify(search.json)))
+  const search = await mcp(t.access_token, { jsonrpc: '2.0', id: 2, method: 'tools/call', params: { name: ROLE === 'owner' ? 'wallet_search' : 'wallet_search_memories', arguments: { query: 'Dana', category: 'coding_preferences' } } })
+  check('search returns coding_preferences records', search.status === 200 && /"provenance"/.test(JSON.stringify(search.json)))
 
   // 6. Refresh rotation
   const rt = await fetch(as.token_endpoint, { method: 'POST', body: new URLSearchParams({ grant_type: 'refresh_token', refresh_token: t.refresh_token, client_id: client.client_id }) })
