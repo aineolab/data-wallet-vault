@@ -88,7 +88,10 @@ page, request the product, and mint a token in the OAuth Token Generator with sc
   wallet per domain (added / removed / changed; connections as counts), writes a `LINKEDIN_DRIFT_CHECK` ledger row and
   **changes nothing**. `POST /v1/sources/linkedin/apply-drift` (MCP `wallet_linkedin_apply_drift`) applies it after the
   owner says yes.
-- Outside the EEA the wallet falls back to the archive flow, and the drift check compares two archives instead.
+- Outside the EEA (Tim is UK-based) the wallet falls back to the archive flow, and the drift check compares two archives
+  instead: the owner's agent asks them to request a fresh fast archive monthly (`wallet_request_linkedin_export`), and the
+  drift diff runs on archive vs archive. **No computer-use or browser automation of LinkedIn** (Tim decided, 15 Oct):
+  it breaches LinkedIn's terms and risks the owner's account.
 - **Mock:** with `MOCK_LINKEDIN=1` the live source serves `seed/out/linkedin/api_snapshot.json` in the real response shape,
   with deliberate drift (promotion, new role, -Fastify +Rust, new headline, +3 connections).
 - **Test:** `eval/linkedin_drift.py` (expected changes found, allowlist respected, counts only, read-only, ledgered).
