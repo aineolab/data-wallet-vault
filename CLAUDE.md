@@ -163,8 +163,19 @@ POST   /v1/memories/query {query, category?, limit?}  Bearer -> {records:[{fact,
 GET    /v1/profile        Bearer
 DELETE /v1/tokens/{id}
 POST   /v1/ship           {grant_id} -> signed URL to buyer, delete Storage object, SHREDDED, ledger DATA_SHIPPED
-GET    /v1/ledger         -> {entries:[...]}
+GET    /v1/ledger         -> {entries:[{created_at, consumer_name, operation, scopes_requested, scopes_served, records_returned}]}
+GET    /v1/connections    (owner) -> {connections:[{token_id, consumer_name, consumer_type, allowed_scopes, expires_at, is_revoked, exclusive}]}
+GET    /v1/jobs           (owner) -> {jobs:[{id, provider, state, created_at, updated_at, summary?}]}
+GET    /v1/exposure       (owner) -> {exposures:[...]}      GET /v1/privacy-requests (owner) -> {requests:[...]}
 ```
+**Lovable dashboard (feature 12) reads exactly these shapes.** Enable CORS for the dashboard origin
+(`*.lovable.app` plus env `DASHBOARD_ORIGIN`) on GET /v1/ledger, /v1/connections, /v1/jobs, /v1/exposure,
+/v1/privacy-requests and DELETE /v1/tokens/{id}. All require the owner bearer token.
+
+## Demo cut (Tim decided ~12:50, 15 Oct)
+Demo = features **1, 2, 3, 4** (must pass first), then **6, 13, 12** in parallel. Lovable (12) is being built from the
+chat session via the Lovable connector, in parallel with Claude Code. Everything else stays in the repo and goes on
+the roadmap slide. Hard stop 14:30.
 
 ## Build waves (all 13 features are Musts; Tim confirmed each one, 15 Oct)
 Build in this order. Run each wave's lanes in parallel (subagents in separate worktrees). **Hard cut line at 14:30:**
