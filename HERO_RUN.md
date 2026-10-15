@@ -10,7 +10,7 @@ Pitch is at 16:00. **Hard stop for new features: 14:30.**
 ## Setup (do first, ask me only for secrets)
 1. Check `server/.env` exists with DATABASE_URL, SUPABASE_SERVICE_ROLE_KEY and OWNER_PASSPHRASE filled. If any are empty,
    stop and tell me exactly which one and where to find it (see `.env.example`). Never print secret values.
-2. The database is already migrated (14 tables, project `irwhfribfzhrmezhvzsy`). Do not run destructive SQL.
+2. The database is already migrated (14 tables + hardening, project `fqnqhzstqtexarnlgusv` in the bzworkai org, London). Do not run destructive SQL.
 3. Create `server/` as its own Node 20 project: Hono, `@modelcontextprotocol/sdk` (streamable HTTP, stateless), `pg`,
    `@supabase/supabase-js`, `zod`, `vitest`. Add `server/vercel.json` and `server/Dockerfile`.
 4. Deploy with `vercel` from `server/` (Root Directory = server). Set the env vars from `server/.env` in Vercel.
