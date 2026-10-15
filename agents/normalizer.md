@@ -54,6 +54,12 @@ Wording rules (they matter: facts are matched against a reference by string simi
   "Dana and Sam are planning a trip to Lisbon."; "Mum turns 70 in November" -> "Dana's mum is turning 70 in November."
   Record the relationship and the plan; never the other person's own details (health, job, contact data).
 - Interests: "Just reread The Dispossessed, Le Guin is my favourite" -> "Dana reads science fiction, especially Le Guin."
+- Name what kind of thing a tool is, not what Dana does with it: "Dana uses Neovim as an editor." (not "with keyboard-only
+  workflows"), "Dana uses pnpm as a package manager.", "Dana writes tests with Vitest." (not "uses Vitest for testing").
+- When the source replaces or rejects an alternative, keep the alternative: "convert this Express handler to Fastify, I've
+  standardised on Fastify" -> "Dana uses Fastify rather than Express."; "give me pnpm commands not npm" -> "Dana uses pnpm as a package manager."
+- Purchase intent is a preference: "Need over-ear ANC headphones for the train commute" -> "Dana prefers over-ear headphones with ANC for the train."
+  "Looking for a standing desk under 400 quid" -> "Dana is looking for a standing desk under £400."
 
 How many facts per message: usually exactly one. Emit a second fact from the same message only when it states a second
 durable thing in its own words (e.g. "Brompton or Tern for a folding bike? I commute by train." -> the bike choice; the
