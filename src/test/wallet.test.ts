@@ -29,7 +29,7 @@ describe('Wallet demo and REST contract', () => {
     expect((await fetchWallet('https://wallet.example', '')).connections).toEqual([]);
   });
   it('revokes through DELETE and supports empty responses', async () => {
-    const mock = vi.fn(async () => new Response(null, { status: 204 }));
+    const mock = vi.fn(async (_url: string, _options: RequestInit) => new Response(null, { status: 204 }));
     vi.stubGlobal('fetch', mock);
     await walletRequest('https://wallet.example', 'synthetic-test-token', '/v1/tokens/123', 'DELETE');
     expect(mock.mock.calls[0]?.[1]?.method).toBe('DELETE');
