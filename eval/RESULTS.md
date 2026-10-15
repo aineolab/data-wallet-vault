@@ -14,3 +14,5 @@ First score is recorded before any tuning.
 - 2026-10-15T14:44:58  exposure_flow: 17/19 -> FAIL
 - 2026-10-15T14:45:21  exposure_flow: 19/19 -> PASS
 - 2026-10-15T14:45:39  exposure_flow: 19/19 -> PASS
+- 2026-10-15T14:51:10  exposure_flow: 18/19 -> FAIL
+- 2026-10-15T14:51:24  exposure_flow: 19/19 -> PASS
