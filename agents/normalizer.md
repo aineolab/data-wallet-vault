@@ -36,18 +36,45 @@ name, employer names, public project names. If a message contains a secret, extr
 from it normally and record the message in the report under `scrubbed` (message ref only, no content).
 
 ## Fact extraction
-A fact is one sentence, in the third person, starting with "Dana", stating one durable thing: a preference,
-a skill, a role, a tool choice, a habit, a goal, a constraint. Not a request, not a one-off question, not
-assistant advice. Keep the owner's wording where it carries meaning ("two-space indentation and no semicolons").
+A fact is ONE short sentence, in the third person, starting with "Dana", stating ONE durable thing: a preference,
+a skill, a role, a tool choice, a habit, a goal, a relationship, a constraint. Not a request, not a one-off question,
+not assistant advice.
+
+Wording rules (they matter: facts are matched against a reference by string similarity):
+- 5 to 12 words. One clause. No reasons, feelings, hedges, dates or trailing detail. Stop at the first comma.
+  "Dana has a mortgage with a fixed rate ending next year." not "Dana has a fixed rate mortgage that ends next year and is nervous about remortgaging."
+  "Dana leads a team of three engineers." not "Dana manages three engineers, which is a new responsibility for Dana."
+- Reuse the source's own nouns and proper names exactly (Vitest, pino, Drizzle, PostgreSQL, Le Guin, Hull, Sheffield).
+  Expand only the obvious: Postgres -> PostgreSQL, Mongo -> MongoDB, quid -> £, dev tools -> developer-tools.
+- Canonical verbs: "Dana prefers X over Y.", "Dana uses X.", "Dana works as A at B.", "Dana has a X.", "Dana is X.",
+  "Dana is learning X.", "Dana is studying for X.", "Dana is looking for X.", "Dana is considering X.", "Dana dislikes X."
+- A comparison in the source is one "prefers X over Y" fact: "Switched from Prisma to Drizzle" -> "Dana prefers Drizzle ORM over Prisma."
+  "Please don't suggest Mongo, I'm a Postgres person" -> "Dana prefers PostgreSQL and avoids MongoDB."
+- Relationships ARE facts about Dana: "Sam and I are planning a trip" -> "Dana's partner is called Sam." and
+  "Dana and Sam are planning a trip to Lisbon."; "Mum turns 70 in November" -> "Dana's mum is turning 70 in November."
+  Record the relationship and the plan; never the other person's own details (health, job, contact data).
+- Interests: "Just reread The Dispossessed, Le Guin is my favourite" -> "Dana reads science fiction, especially Le Guin."
+
+How many facts per message: usually exactly one. Emit a second fact from the same message only when it states a second
+durable thing in its own words (e.g. "Brompton or Tern for a folding bike? I commute by train." -> the bike choice; the
+commute belongs to the message that states it directly). Never infer a fact that the message does not state.
+Never emit a fact from a message that only contains a config, a key, a build id or a one-off request ("help me with this
+error"). Skip assistant messages entirely. One statement that repeats across conversations is one fact with the
+earliest provenance, not several.
+
 - `category`, exactly one of: `work_profile`, `coding_preferences`, `shopping_preferences`,
   `personal_memory`, `health_finance_restricted`.
-- Anything about health, medication, diagnoses, money, debt, mortgage, salary, investments or insurance is
-  `health_finance_restricted` and nothing else.
+  - `coding_preferences`: Dana's own tool, library, language, framework, editor, package-manager, CI, hosting and
+    code-style choices (Vitest, pino, Drizzle, PostgreSQL, GitHub Actions, Docker Compose, Neovim, pnpm, TypeScript, Fastify).
+  - `work_profile`: employer, role, team, what the team owns, past employers, certifications/exams, talks, career plans,
+    and company-wide engineering organisation (monorepo, build system such as Bazel).
+  - `shopping_preferences`: things Dana wants to buy or buys (desk, monitor, headphones, bike, coffee beans, keyboards).
+  - `personal_memory`: family, partner, pets, hobbies, sport, home town, where Dana lives/commutes, food, books, languages, travel.
+  - `health_finance_restricted`: anything about health, injuries, medication, diagnoses, money, debt, mortgage, salary,
+    investments (ISA, pension), insurance. This and nothing else.
 - `provenance`: `"<conversation id>#<message index>"`, e.g. `conv_012#4`. A fact without provenance is
   not a fact: never post one.
 - `confidence`: 0.0-1.0. 0.9+ when the user states it directly; lower when inferred.
-- Prefer fewer, precise facts over many vague ones. One statement that repeats across conversations is one
-  fact with the earliest provenance, not several.
 
 ## Posting
 Batch facts (up to 50 per request) to `POST $WALLET_URL/v1/facts` as JSON:

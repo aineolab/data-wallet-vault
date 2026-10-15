@@ -5,7 +5,8 @@
   "description": "Runtime for the wallet's hosted agents (Anthropic Managed Agents). Setup is `ant apply`; this only starts sessions.",
   "scripts": {
     "normalizer": "tsx --env-file=../server/.env run-normalizer.ts",
-    "sql": "tsx --env-file=../server/.env sql.ts"
+    "sql": "tsx --env-file=../server/.env sql.ts",
+    "dump": "tsx --env-file=../server/.env dump-facts.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "latest",
