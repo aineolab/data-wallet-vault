@@ -1,0 +1,85 @@
+{
+  "conversations_read": 30,
+  "messages_read": 96,
+  "facts_posted": 38,
+  "by_category": {
+    "coding_preferences": 12,
+    "health_finance_restricted": 3,
+    "personal_memory": 9,
+    "shopping_preferences": 6,
+    "work_profile": 8
+  },
+  "scrubbed": [
+    "conv_001#2",
+    "conv_007#2",
+    "conv_013#2",
+    "conv_019#2",
+    "conv_025#2"
+  ],
+  "skipped": [
+    {
+      "ref": "conv_001#2",
+      "why": "contained a secret (scrubbed); one-off config review request with no durable fact"
+    },
+    {
+      "ref": "conv_002#0",
+      "why": "one-off travel plan centred on another person; no durable fact about the owner"
+    },
+    {
+      "ref": "conv_004#2",
+      "why": "one-off debugging question; commit hash is a benign identifier, no durable fact"
+    },
+    {
+      "ref": "conv_007#2",
+      "why": "contained a secret (scrubbed); one-off config review request with no durable fact"
+    },
+    {
+      "ref": "conv_011#0",
+      "why": "one-off travel question about another person's wishes"
+    },
+    {
+      "ref": "conv_013#2",
+      "why": "contained a secret (scrubbed); one-off config review request with no durable fact"
+    },
+    {
+      "ref": "conv_016#2",
+      "why": "one-off debugging question; no durable fact"
+    },
+    {
+      "ref": "conv_019#2",
+      "why": "contained a secret (scrubbed); one-off config review request with no durable fact"
+    },
+    {
+      "ref": "conv_022#2",
+      "why": "one-off debugging question; uuid is a benign identifier, no durable fact"
+    },
+    {
+      "ref": "conv_025#0",
+      "why": "fact about a family member, not the owner; one-off event plan"
+    },
+    {
+      "ref": "conv_025#2",
+      "why": "contained a secret (scrubbed); one-off config review request with no durable fact"
+    }
+  ],
+  "post_failures": [],
+  "post_log": [
+    {
+      "request": 1,
+      "method": "POST",
+      "url": "https://data-wallet-server.vercel.app/v1/facts",
+      "batch_start": 0,
+      "batch_size": 38,
+      "attempts": 1,
+      "http_status": 200,
+      "response_body": {
+        "inserted": 38,
+        "duplicates": 0,
+        "rejected": [],
+        "quarantined": 0,
+        "raw_file_id": null
+      }
+    }
+  ],
+  "posted_facts_file": "/mnt/session/outputs/normalizer-posted-facts.json"
+}

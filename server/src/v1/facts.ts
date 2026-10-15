@@ -283,7 +283,8 @@ facts.post('/facts', requireDataIn, async (c) => {
       duplicates,
       rejected,
       quarantined,
-      raw_file_id: defaultRawFileId,
+      // When items carry their own raw_file_id and no batch default was given, echo the one they used.
+      raw_file_id: defaultRawFileId ?? accepted[0]?.rawFileId ?? null,
       ...(sourceFile ? { source_file: sourceFile } : {}),
     },
     200,
