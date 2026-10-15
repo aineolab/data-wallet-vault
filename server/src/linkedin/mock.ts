@@ -21,7 +21,8 @@ export const isMock = () => config().MOCK_LINKEDIN === '1'
 
 export const ARCHIVE_NAME = 'Basic_LinkedInDataExport_10-15-2026.zip'
 const SEED_DIR = 'seed/out/linkedin'
-const RAW_BASE = 'https://raw.githubusercontent.com/aineolab/data-wallet-vault/main'
+// Vercel has no seed/ (Root Directory = server): the files are served from server/public as static assets.
+const RAW_BASE = (process.env.MOCK_LINKEDIN_SEED_URL ?? 'https://raw.githubusercontent.com/aineolab/data-wallet-vault/main').replace(/\/+$/, '')
 
 /** Request-body knobs, honoured only in mock mode. */
 export function mockKnobs(body: Record<string, unknown> | undefined): MockKnobs {
@@ -58,7 +59,7 @@ function seedCandidates(name: string): string[] {
 /** Read a seed file from disk, or from the public repo when the deployment (Vercel, Root Directory = server) lacks seed/. */
 async function seedFile(name: string): Promise<Uint8Array> {
   for (const p of seedCandidates(name)) if (existsSync(p)) return new Uint8Array(await readFile(p))
-  const res = await fetch(`${RAW_BASE}/${SEED_DIR}/${name}`)
+  const res = await fetch(process.env.MOCK_LINKEDIN_SEED_URL ? `${RAW_BASE}/${name}` : `${RAW_BASE}/${SEED_DIR}/${name}`)
   if (!res.ok) throw new Error(`mock: seed file ${name} not found locally or at ${RAW_BASE}`)
   return new Uint8Array(await res.arrayBuffer())
 }
