@@ -1,0 +1,16 @@
+{
+  "name": "data-wallet-agents",
+  "private": true,
+  "type": "module",
+  "description": "Runtime for the wallet's hosted agents (Anthropic Managed Agents). Setup is `ant apply`; this only starts sessions.",
+  "scripts": {
+    "normalizer": "tsx --env-file=../server/.env run-normalizer.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "tsx": "^4"
+  }
+}

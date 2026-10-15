@@ -1,0 +1,10 @@
+# Sandbox for the wallet's hosted agents. Egress is limited to the wallet server only;
+# web_search / web_fetch are disabled on the agent itself (networking does not govern them).
+name: wallet-cloud
+config:
+  type: cloud
+  networking:
+    type: limited
+    allow_package_managers: false
+    allowed_hosts:
+      - data-wallet-server.vercel.app
