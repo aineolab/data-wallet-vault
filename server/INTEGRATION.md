@@ -55,3 +55,35 @@ OWNER tokens should grant all five scopes.
 Ledger operations this lane writes (all accepted by `LedgerOperation`'s open string type): `FACTS_INGESTED` (consumer `linkedin_mock`/`linkedin`),
 `CONSENT_REVOKED`, `LINKEDIN_DRIFT_CHECK`, `LINKEDIN_DRIFT_APPLIED`. Storage bucket `vault` is created on first use (service role).
 Dependency added to `server/package.json`: `fflate` (zip parsing).
+
+### exposure lane (branch `lane-exposure`, feature 13) — no core changes needed, five notes
+Files: `src/exposure/{mockweb,scan,requests}.ts`, `src/v1/exposure.ts`, `public/seed/exposure/web_index.json` (static copy of
+`seed/out/exposure/web_index.json` for Vercel). `eval/exposure_flow.py` 19/19 locally (MOCK_WEB=1, real Supabase DB).
+1. **Vercel env:** set `MOCK_WEB_SEED_URL=https://data-wallet-server.vercel.app/seed/exposure` (the mock fetches
+   `${MOCK_WEB_SEED_URL}/web_index.json` first, then local paths: repo `seed/out/exposure`, `server/public/seed/exposure`,
+   or `MOCK_WEB_SEED_DIR`). If `seed/out/exposure/web_index.json` ever changes, re-copy it to `server/public/seed/exposure/`.
+2. **Owner identifiers are auto-seeded in mock mode.** The eval never seeds `owner_identifiers` through the API, so with
+   `MOCK_WEB=1` the first scan inserts Dana's five identifiers (`DEMO_OWNER_IDENTIFIERS` in `mockweb.ts`, mirrors
+   `seed/out/exposure/exposure_key.json`, `verified_via = manual_attest`) when the table is empty. Outside mock mode the owner
+   adds them: `POST /v1/owner-identifiers {kind, value, verified_via?}` · `GET` · `DELETE /v1/owner-identifiers/:id`.
+3. **Clean-DB assumptions of the eval: none that block a re-run.** Rescans upsert on `UNIQUE (tenant_id, user_id, url)`
+   and never overwrite the owner's confirm/deny; each run drafts fresh `privacy_requests` rows, and leftover SENT/OVERDUE rows
+   from earlier runs just advance on the next tick. Re-run is 19/19 on a populated DB. To reset anyway (privacy_request_events
+   is append-only, so delete children first):
+   `DELETE FROM privacy_request_events; DELETE FROM privacy_requests; DELETE FROM exposures; DELETE FROM owner_identifiers;`
+   Case 6 needs `CONSUMER_TOKEN` (any non-OWNER token, e.g. `POST /v1/tokens/issue {consumer_name, consumer_type:'AI_AGENT_MCP', scopes:['coding_preferences']}`); without it the eval reports that case as FAIL by design.
+4. **Cron:** `POST <PUBLIC_URL>/v1/privacy-requests/tick` (no body, no header = demo owner) alongside the linkedin `/v1/jobs/tick`;
+   daily is enough (deadlines are in days). With a real clock an OVERDUE request escalates 7 days later; the mock clock
+   (`{now}` body, honoured only with `MOCK_WEB=1`) escalates on the next tick so the eval's two ticks pass.
+5. **Live web search is not wired.** `MOCK_WEB=0` makes `POST /v1/exposure/scan` return `503 WEB_SEARCH_NOT_CONFIGURED`.
+   A Tavily/Exa source only has to implement `WebSource` in `mockweb.ts` (`search(query)` -> URLs, `fetch(url)` -> page or
+   `allowed:false` after a robots.txt check). Everything else (matching, confidence, namesakes, drafts) is source-independent.
+
+Owner-only routes (core `requireOwner`, scoped to this lane's paths so it never wraps other lanes' routes): `POST /v1/exposure/scan {subject?}`,
+`GET /v1/exposure`, `GET /v1/exposure/:id`, `POST /v1/exposure/:id/confirm {is_me}`, `POST /v1/privacy-requests {exposure_id, kind}`,
+`GET /v1/privacy-requests`, `GET /v1/privacy-requests/:id`, `POST /v1/privacy-requests/:id/sent`, `POST /v1/privacy-requests/:id/event {type}`
+(or `/:id/ack|data_received|completed|refused|withdrawn|extended`), `POST /v1/privacy-requests/tick {now?}`.
+MCP lane: `wallet_scan_exposure`, `wallet_exposures`, `wallet_confirm_exposure`, `wallet_draft_privacy_request`, `wallet_mark_request_sent`,
+`wallet_privacy_requests` map 1:1 onto those paths.
+Ledger operations written (consumer `owner`): `EXPOSURE_SCAN`, `EXPOSURE_CONFIRMED`/`EXPOSURE_DENIED`, `PRIVACY_REQUEST_DRAFTED`,
+`PRIVACY_REQUEST_SENT`, `PRIVACY_REQUEST_<EVENT>`, `PRIVACY_REQUEST_OVERDUE`, `PRIVACY_REQUEST_ESCALATED`. No new dependencies.
