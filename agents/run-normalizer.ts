@@ -108,7 +108,7 @@ async function main() {
                   `${WALLET_URL}/v1/facts with raw_file_id "${RAW_FILE_ID}". Write the report to ` +
                   `/mnt/session/outputs/normalizer-report.json.`,
                 rubric: { type: 'text', content: STARTER_RUBRIC },
-                max_iterations: 3,
+                max_iterations: 1,
               },
             ],
           })
