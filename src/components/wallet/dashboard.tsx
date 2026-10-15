@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
-import { Activity, ArrowDownLeft, ArrowRight, Check, CheckCheck, ChevronRight, Circle, Database, Download, Fingerprint, Globe2, Link2, LockKeyhole, RefreshCw, Settings2, ShieldCheck, Sparkles, Unplug, Wallet, X } from 'lucide-react';
+import { Activity, ArrowDownLeft, ArrowRight, Check, CheckCheck, ChevronRight, Circle, Database, Download, Fingerprint, Globe2, Link2, LockKeyhole, Plug, RefreshCw, Settings2, ShieldCheck, Sparkles, Unplug, Wallet, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
 import { configuredUrl, fetchWallet, scopeNames, validateWalletUrl, walletRequest, type Connection, type Job, type WalletData } from '@/lib/wallet/data';
 import { initialWalletOptions } from '@/lib/wallet/queries';
+import { ConnectAgent } from './connect';
 
-type Tab = 'statement' | 'connections' | 'imports' | 'online';
-const tabs = [{ id: 'statement', label: 'Statement', icon: Activity }, { id: 'connections', label: 'Connections', icon: Link2 }, { id: 'imports', label: 'Imports', icon: Download }, { id: 'online', label: 'My data online', icon: Globe2 }] as const;
+type Tab = 'statement' | 'connections' | 'imports' | 'online' | 'connect';
+const tabs = [{ id: 'statement', label: 'Statement', icon: Activity }, { id: 'connections', label: 'Connections', icon: Link2 }, { id: 'imports', label: 'Imports', icon: Download }, { id: 'online', label: 'My data online', icon: Globe2 }, { id: 'connect', label: 'Connect', icon: Plug }] as const;
 export function formatDate(value?: string | null) { if (!value) return '—'; const date = new Date(value); return Number.isNaN(date.getTime()) ? '—' : date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); }
 function elapsed(value: string) { const mins = Math.max(0, Math.floor((Date.now() - new Date(value).getTime()) / 60000)); if (!Number.isFinite(mins)) return '—'; return mins < 60 ? `${mins}m` : mins < 1440 ? `${Math.floor(mins / 60)}h ${mins % 60}m` : `${Math.floor(mins / 1440)}d`; }
 function pretty(value: string) { return value.replace(/[_-]/g, ' ').replace(/\b\w/g, c => c.toUpperCase()); }
@@ -114,7 +115,7 @@ export function WalletDashboard({ tab, onTabChange }: { tab: Tab; onTabChange: (
               <div className="ledger-scopes"><Scopes scopes={entry.scopes_requested} /><ArrowRight className="shrink-0 text-muted-foreground" size={14} />{blocked ? <span className="flex items-center gap-1.5 text-sm text-warning"><LockKeyhole size={13} />Nothing shared</span> : <Scopes scopes={entry.scopes_served} />}</div>
               <div className="ledger-records"><span className={cn('text-xl font-medium', blocked && 'text-warning')}>{entry.records_returned}</span><span className="text-xs text-muted-foreground sm:hidden"> records</span></div>
             </div>; })}
-          </div>{!data.entries.length && <EmptyState label={isLive ? 'No wallet events to show.' : 'No activity yet.'} />}
+          </div>{!data.entries.length && <><EmptyState label={isLive ? 'No wallet events to show.' : 'No activity yet.'} /><div className="mt-6 flex justify-center"><Button className="h-14 px-6 text-lg" onClick={() => onTabChange('connect')}><Plug />Connect your agent</Button></div></>}
           <div className="mt-5 flex items-center gap-2 text-xs text-muted-foreground"><Fingerprint size={15} /><span>A record of access, not a copy of your personal data.</span></div>
         </>}
         {tab === 'connections' && <>
@@ -129,6 +130,7 @@ export function WalletDashboard({ tab, onTabChange }: { tab: Tab; onTabChange: (
           </article>)}</div>{!data.connections.length && <EmptyState label="No connections to show." />}
           <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground"><LockKeyhole size={17} />Health & money (never shared by default)</div>
         </>}
+        {tab === 'connect' && <ConnectAgent url={credentials.url || configuredUrl} ownerToken={credentials.token} isLive={isLive} onOpenConnections={() => onTabChange('connections')} />}
         {tab === 'imports' && <><SectionHeading title="Your data, brought together" subtitle="Follow your imports from request to wallet." aside={<span className="text-sm text-muted-foreground">{data.jobs.length} imports</span>} /><div>{data.jobs.map(job => <ImportJob key={job.id} job={job} />)}</div>{!data.jobs.length && <EmptyState label="No import jobs to show." />}</>}
         {tab === 'online' && <>
           <SectionHeading title="Your footprint online" subtitle="Where your data appears. What’s being done about it." aside={<span className="flex items-center gap-2 text-sm text-muted-foreground"><LockKeyhole size={15} />Read-only · Actions in Claude</span>} />

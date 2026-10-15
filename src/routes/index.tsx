@@ -3,7 +3,7 @@ import { WalletDashboard } from '@/components/wallet/dashboard';
 import { initialWalletOptions } from '@/lib/wallet/queries';
 
 export const Route = createFileRoute('/')({
-  validateSearch: (search: Record<string, unknown>): { tab: 'statement' | 'connections' | 'imports' | 'online' } => ({ tab: search['tab'] === 'connections' || search['tab'] === 'imports' || search['tab'] === 'online' ? search['tab'] : 'statement' }),
+  validateSearch: (search: Record<string, unknown>): { tab: 'statement' | 'connections' | 'imports' | 'online' | 'connect' } => ({ tab: search['tab'] === 'connections' || search['tab'] === 'imports' || search['tab'] === 'online' || search['tab'] === 'connect' ? search['tab'] : 'statement' }),
   loader: ({ context }) => context.queryClient.ensureQueryData(initialWalletOptions),
   head: () => ({ meta: [
     { title: 'Data Wallet — Dana Whitfield’s owner dashboard' },
