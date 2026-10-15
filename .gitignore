@@ -37,3 +37,4 @@ vault/
 __pycache__/
 *.pyc
 eval/out/
+server/.tokens

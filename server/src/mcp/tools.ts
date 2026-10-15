@@ -6,6 +6,7 @@ import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js'
 import type { Auth } from '../auth.js'
 import { query } from '../db.js'
+import * as li from '../linkedin/index.js'
 import { ledger, readLedger } from '../ledger.js'
 import { ALL_SCOPES, RESTRICTED, effectiveScopes, queryMemories, type Scope } from '../scopes.js'
 
@@ -286,6 +287,8 @@ export function registerOwnerTools(server: McpServer, ctx: ToolContext) {
       annotations: readOnly,
     },
     async ({ job_id }) => {
+      // Demo without a cron: advance due jobs before reporting (mock provider auto-advances on tick).
+      try { await li.tick(new Date()) } catch (e) { console.error('job_status tick', (e as Error).message) }
       if (job_id) {
         const job = await query(
           `SELECT id, provider, archive_kind, state, external_ref, ready_hint_at, archive_expires_at, attempts, last_error,
