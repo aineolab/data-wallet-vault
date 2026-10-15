@@ -6,6 +6,8 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { config, publicUrl } from './config.js'
 import { query } from './db.js'
+import v1 from './v1/index.js'
+import mcp from './mcp/index.js'
 
 const app = new Hono()
 
@@ -68,11 +70,8 @@ app.get('/.well-known/oauth-protected-resource', (c) => {
   })
 })
 
-app.all('/mcp', (c) => {
-  const base = publicUrl(c.req.url)
-  c.header('WWW-Authenticate', `Bearer resource_metadata="${base}/.well-known/oauth-protected-resource"`)
-  return c.json({ error: 'unauthorized', message: 'Bearer token required' }, 401)
-})
+app.route('/mcp', mcp)
+app.route('/v1', v1)
 
 app.notFound((c) => c.json({ error: 'not_found', path: new URL(c.req.url).pathname }, 404))
 app.onError((err, c) => {
