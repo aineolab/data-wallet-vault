@@ -44,7 +44,8 @@ wallet.post('/tokens/issue', requireOwner, async (c) => {
   if (!scopes.length) return c.json({ error: 'invalid_scope', message: 'scopes must list at least one scope' }, 400)
 
   // RESALE GUARD: a shipped exclusive grant to someone else that covers any requested scope blocks this issue.
-  const { rows: shipped } = await query<{ id: string; counterparty: string; allowed_scopes: string[] }>(
+  // The owner is not a buyer: their own tokens are never resale.
+  const { rows: shipped } = consumerType === 'OWNER' ? { rows: [] as { id: string; counterparty: string; allowed_scopes: string[] }[] } : await query<{ id: string; counterparty: string; allowed_scopes: string[] }>(
     `SELECT id, counterparty, allowed_scopes FROM consent_grants
       WHERE tenant_id = $1 AND user_id = $2 AND direction = 'DATA_OUT'
         AND status = 'SHIPPED' AND exclusive = TRUE
