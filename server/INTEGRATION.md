@@ -14,3 +14,12 @@ Lanes never edit the core. Need a core change? Add a request below with the exac
 
 ## Requests
 (none yet)
+
+### wallet-api lane (no core change needed; convention note for other lanes)
+- `POST /v1/ship` shreds `raw_vault_files` under the grant and deletes their Storage objects. It recognises
+  `storage_uri` of the form `supabase://vault/<path>`, `storage://vault/<path>`, `vault/<path>` or a full
+  `<SUPABASE_URL>/storage/v1/object/.../vault/<path>` URL. `seed://…` and `file://…` are marked SHREDDED in the DB
+  but have no Storage object to delete. Ingest lanes: please write one of the recognised forms.
+- `server/scripts/seed-fixture.ts` is a TEMPORARY demo fixture (40 answer-key facts, `source_provider = 'seed_fixture'`).
+  Delete those rows (`DELETE FROM canonical_memories WHERE source_provider = 'seed_fixture'`) once the Normalizer has run,
+  otherwise `eval/score.py` precision is measured against the answer key itself.
