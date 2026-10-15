@@ -1,0 +1,125 @@
+{
+ "archive": "Basic_LinkedInDataExport_10-15-2026.zip",
+ "sha256": "a0151a1f3cbf8cdf501d1d5cc3bab286f328ae6189d4c4241170ed252a2b9576",
+ "expect_profile": {
+  "full_name": "Dana Whitfield",
+  "headline": "Backend engineer at Parcelgrid \u00b7 event-driven systems \u00b7 TypeScript",
+  "location": "Leeds, England, United Kingdom"
+ },
+ "expect_positions": [
+  {
+   "company": "Parcelgrid",
+   "title": "Senior Backend Engineer"
+  },
+  {
+   "company": "Northline Freight",
+   "title": "Backend Engineer"
+  },
+  {
+   "company": "Humber Digital",
+   "title": "Junior Developer"
+  }
+ ],
+ "expect_skills": [
+  "TypeScript",
+  "Node.js",
+  "PostgreSQL",
+  "Event-driven architecture",
+  "Distributed systems",
+  "AWS",
+  "Docker",
+  "Fastify"
+ ],
+ "expect_connections_count": 120,
+ "forbidden_strings": [
+  "https://www.linkedin.com/in/aisha-brennan-007",
+  "https://www.linkedin.com/in/aisha-byrne-075",
+  "https://www.linkedin.com/in/aisha-doyle-049",
+  "https://www.linkedin.com/in/aisha-kaur-072",
+  "https://www.linkedin.com/in/aisha-moreau-000",
+  "https://www.linkedin.com/in/aisha-okafor-006",
+  "https://www.linkedin.com/in/alex-byrne-002",
+  "https://www.linkedin.com/in/alex-carter-066",
+  "https://www.linkedin.com/in/alex-moreau-035",
+  "https://www.linkedin.com/in/alex-moreau-110",
+  "https://www.linkedin.com/in/alex-silva-026",
+  "https://www.linkedin.com/in/alex-weber-069",
+  "https://www.linkedin.com/in/ben-brennan-117",
+  "https://www.linkedin.com/in/ben-brennan-118",
+  "https://www.linkedin.com/in/ben-haddad-092",
+  "https://www.linkedin.com/in/ben-kaur-111",
+  "https://www.linkedin.com/in/ben-moreau-018",
+  "https://www.linkedin.com/in/ben-moreau-073",
+  "https://www.linkedin.com/in/ben-nair-036",
+  "https://www.linkedin.com/in/ben-patel-022",
+  "My salary details are attached"
+ ],
+ "job_states_happy": [
+  "REQUESTED",
+  "AWAITING_ARCHIVE",
+  "ARCHIVE_READY",
+  "INGESTING",
+  "AVAILABLE"
+ ],
+ "job_states_terminal_fail": [
+  "EXPIRED",
+  "FAILED",
+  "CANCELLED"
+ ],
+ "api_drift": {
+  "allowlist": [
+   "PROFILE",
+   "POSITIONS",
+   "EDUCATION",
+   "SKILLS",
+   "CONNECTIONS"
+  ],
+  "never_request": [
+   "INBOX",
+   "SECURITY_CHALLENGE_PIPE",
+   "LOGIN",
+   "PHONE_NUMBERS",
+   "EMAIL_ADDRESSES",
+   "IDENTITY_CREDENTIALS_AND_ASSETS",
+   "PREMIUM_NOTES"
+  ],
+  "expect": {
+   "PROFILE": {
+    "changed": [
+     "Headline"
+    ]
+   },
+   "POSITIONS": {
+    "added": [
+     [
+      "Parcelgrid",
+      "Engineering Manager (acting)"
+     ]
+    ],
+    "changed": [
+     [
+      "Parcelgrid",
+      "Senior Backend Engineer",
+      "Staff Backend Engineer"
+     ]
+    ],
+    "removed": []
+   },
+   "EDUCATION": {
+    "unchanged": true
+   },
+   "SKILLS": {
+    "added": [
+     "Rust"
+    ],
+    "removed": [
+     "Fastify"
+    ]
+   },
+   "CONNECTIONS": {
+    "count_before": 120,
+    "count_after": 123
+   }
+  }
+ }
+}

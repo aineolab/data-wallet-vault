@@ -30,3 +30,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Data Wallet
+vault/
+.env
+__pycache__/
+*.pyc
+eval/out/
+server/.tokens

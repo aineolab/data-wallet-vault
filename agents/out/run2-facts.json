@@ -1,0 +1,286 @@
+{
+ "note": "agent v2, session sesn_014bRwuc2rFgBvQoavy61xtH, recall 0.90 precision 0.75 (normalizer-only 0.90) leaks 0",
+ "count": 40,
+ "facts": [
+  {
+   "provenance": "conv_000#0",
+   "category": "coding_preferences",
+   "confidence": 0.93,
+   "fact": "Dana prefers two-space indentation and no semicolons.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_000#2",
+   "category": "coding_preferences",
+   "confidence": 0.93,
+   "fact": "Dana uses Vitest for testing.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_001#0",
+   "category": "personal_memory",
+   "confidence": 0.9,
+   "fact": "Dana is learning to speak Spanish.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_002#0",
+   "category": "personal_memory",
+   "confidence": 0.95,
+   "fact": "Dana and Sam are planning a trip to Lisbon.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_002#0",
+   "category": "personal_memory",
+   "confidence": 0.85,
+   "fact": "Dana's partner is called Sam.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_003#0",
+   "category": "work_profile",
+   "confidence": 0.97,
+   "fact": "Dana works as a backend engineer at Parcelgrid.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_003#2",
+   "category": "work_profile",
+   "confidence": 0.95,
+   "fact": "Dana leads a team of three engineers.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_004#0",
+   "category": "work_profile",
+   "confidence": 0.95,
+   "fact": "Dana previously worked at Northline Freight for four years.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_005#0",
+   "category": "health_finance_restricted",
+   "confidence": 0.9,
+   "fact": "Dana is having physio for a knee injury.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_006#0",
+   "category": "personal_memory",
+   "confidence": 0.95,
+   "fact": "Dana has a dog called Biscuit.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_006#2",
+   "category": "health_finance_restricted",
+   "confidence": 0.95,
+   "fact": "Dana has a mortgage with a fixed rate ending next year.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_007#0",
+   "category": "personal_memory",
+   "confidence": 0.88,
+   "fact": "Dana plays five-a-side football on Thursdays.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_008#0",
+   "category": "coding_preferences",
+   "confidence": 0.95,
+   "fact": "Dana uses pino for structured JSON logging.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_009#0",
+   "category": "shopping_preferences",
+   "confidence": 0.93,
+   "fact": "Dana is looking for a standing desk under £400.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_009#2",
+   "category": "shopping_preferences",
+   "confidence": 0.88,
+   "fact": "Dana is considering a 34 inch ultrawide monitor.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_010#0",
+   "category": "shopping_preferences",
+   "confidence": 0.92,
+   "fact": "Dana is looking for over-ear ANC headphones.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_012#0",
+   "category": "shopping_preferences",
+   "confidence": 0.9,
+   "fact": "Dana is considering a Brompton or Tern folding bike.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_012#2",
+   "category": "shopping_preferences",
+   "confidence": 0.92,
+   "fact": "Dana buys coffee beans from a roaster in Sheffield.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_013#0",
+   "category": "personal_memory",
+   "confidence": 0.85,
+   "fact": "Dana goes running on Sunday mornings.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_014#0",
+   "category": "work_profile",
+   "confidence": 0.88,
+   "fact": "Dana is considering starting a developer-tools company.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_015#0",
+   "category": "coding_preferences",
+   "confidence": 0.95,
+   "fact": "Dana prefers Drizzle ORM over Prisma.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_015#2",
+   "category": "personal_memory",
+   "confidence": 0.96,
+   "fact": "Dana grew up in Hull.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_016#0",
+   "category": "personal_memory",
+   "confidence": 0.94,
+   "fact": "Dana commutes by train from outside Leeds.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_017#0",
+   "category": "work_profile",
+   "confidence": 0.95,
+   "fact": "Dana is studying for the AWS Solutions Architect exam.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_018#0",
+   "category": "personal_memory",
+   "confidence": 0.9,
+   "fact": "Dana reads science fiction, especially Le Guin.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_018#2",
+   "category": "coding_preferences",
+   "confidence": 0.95,
+   "fact": "Dana prefers PostgreSQL and avoids MongoDB.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_019#0",
+   "category": "work_profile",
+   "confidence": 0.95,
+   "fact": "Dana's team owns the route optimisation service.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_020#0",
+   "category": "coding_preferences",
+   "confidence": 0.93,
+   "fact": "Dana uses GitHub Actions for CI.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_021#0",
+   "category": "coding_preferences",
+   "confidence": 0.93,
+   "fact": "Dana runs side projects on Docker Compose on Hetzner.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_021#2",
+   "category": "coding_preferences",
+   "confidence": 0.94,
+   "fact": "Dana uses Neovim with keyboard-only workflows.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_022#0",
+   "category": "work_profile",
+   "confidence": 0.93,
+   "fact": "Dana is giving a talk on event-driven architecture.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_023#0",
+   "category": "health_finance_restricted",
+   "confidence": 0.85,
+   "fact": "Dana has an ISA investment account.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_024#0",
+   "category": "work_profile",
+   "confidence": 0.92,
+   "fact": "Dana's company uses a Bazel monorepo.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_024#2",
+   "category": "shopping_preferences",
+   "confidence": 0.92,
+   "fact": "Dana likes mechanical keyboards with brown switches.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_025#0",
+   "category": "personal_memory",
+   "confidence": 0.95,
+   "fact": "Dana's mum is turning 70 in November.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_026#0",
+   "category": "coding_preferences",
+   "confidence": 0.95,
+   "fact": "Dana uses pnpm instead of npm.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_027#0",
+   "category": "coding_preferences",
+   "confidence": 0.96,
+   "fact": "Dana prefers TypeScript over Python for backend services.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_027#2",
+   "category": "personal_memory",
+   "confidence": 0.96,
+   "fact": "Dana follows a vegetarian diet.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_028#0",
+   "category": "coding_preferences",
+   "confidence": 0.92,
+   "fact": "Dana avoids GraphQL for internal services.",
+   "is_quarantined": false
+  },
+  {
+   "provenance": "conv_029#0",
+   "category": "coding_preferences",
+   "confidence": 0.95,
+   "fact": "Dana has standardised on Fastify.",
+   "is_quarantined": false
+  }
+ ]
+}

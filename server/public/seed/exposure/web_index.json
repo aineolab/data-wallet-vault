@@ -1,0 +1,76 @@
+{
+ "pages": [
+  {
+   "url": "https://findpeoplenow.example/p/dana-whitfield-leeds",
+   "site": "FindPeopleNow",
+   "site_type": "people_search",
+   "robots_allowed": true,
+   "text": "Dana Whitfield, age 30-34, Leeds, West Yorkshire. Possible relatives: Sam W. Phone: 07700 900123. Email: dana.whitfield@mail.example",
+   "privacy_contact": "privacy@findpeoplenow.example",
+   "opt_out_form": "https://findpeoplenow.example/optout"
+  },
+  {
+   "url": "https://dataharbor.example/profiles/8841-dana-whitfield",
+   "site": "DataHarbor Marketing Ltd",
+   "site_type": "data_broker",
+   "robots_allowed": true,
+   "text": "Consumer profile: Dana Whitfield, Leeds. Interests: cycling, coffee, home office. Employer: Parcelgrid. Segment: Tech professional 25-34.",
+   "privacy_contact": "dpo@dataharbor.example",
+   "opt_out_form": null
+  },
+  {
+   "url": "https://forum.nodecraft.example/t/fastify-vs-express/1932#post-7",
+   "site": "Nodecraft Forum",
+   "site_type": "forum",
+   "robots_allowed": true,
+   "text": "dwhitfield_dev wrote: we moved our Leeds team at Parcelgrid to Fastify last year. DM me at dana.whitfield@mail.example",
+   "privacy_contact": "admin@nodecraft.example",
+   "opt_out_form": null
+  },
+  {
+   "url": "https://breachwatch.example/incidents/2025-shopsmart",
+   "site": "BreachWatch",
+   "site_type": "breach_notice",
+   "robots_allowed": true,
+   "text": "ShopSmart 2025 breach: exposed email addresses including dana.whitfield@mail.example, hashed passwords, postcodes.",
+   "privacy_contact": null,
+   "opt_out_form": null
+  },
+  {
+   "url": "https://parcelgrid.example/team",
+   "site": "Parcelgrid",
+   "site_type": "company_site",
+   "robots_allowed": true,
+   "text": "Our team: Dana Whitfield, Senior Backend Engineer, leads route optimisation.",
+   "privacy_contact": "privacy@parcelgrid.example",
+   "opt_out_form": null
+  },
+  {
+   "url": "https://bristolsmiles.example/our-dentists",
+   "site": "Bristol Smiles Dental",
+   "site_type": "company_site",
+   "robots_allowed": true,
+   "text": "Dr Dana Whitfield BDS, Bristol. Special interest in paediatric dentistry.",
+   "privacy_contact": "info@bristolsmiles.example",
+   "opt_out_form": null
+  },
+  {
+   "url": "https://techleeds.example/news/parcelgrid-raises",
+   "site": "TechLeeds News",
+   "site_type": "news",
+   "robots_allowed": true,
+   "text": "Parcelgrid, the Leeds logistics software company, raised a Series A led by its CEO Priya Kaur.",
+   "privacy_contact": null,
+   "opt_out_form": null
+  },
+  {
+   "url": "https://closedbook.example/people/dana-whitfield",
+   "site": "ClosedBook",
+   "site_type": "people_search",
+   "robots_allowed": false,
+   "text": "Dana Whitfield, Leeds. Full report available.",
+   "privacy_contact": "privacy@closedbook.example",
+   "opt_out_form": "https://closedbook.example/remove"
+  }
+ ]
+}

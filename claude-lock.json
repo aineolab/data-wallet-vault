@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "origin": {
+    "base_url": "https://api.anthropic.com",
+    "organization_id": "6714c6de-13c4-40eb-a1aa-00195cec60f9",
+    "workspace_id": "wrkspc_011khitCmpfWCdQ1zWcQUq8E"
+  },
+  "resources": {
+    "./agents/normalizer.md": {
+      "kind": "agent",
+      "id": "agent_015DExDComxJS4VjFKqZbgWf",
+      "version": "3",
+      "hash": "2cbde3b6f042c8ee8367759a5c41c4d5",
+      "remote_hash": "f0a6f457619cb8407da2c77017b8b629"
+    },
+    "./environments/wallet-cloud.yaml": {
+      "kind": "environment",
+      "id": "env_01Eez85w96evhM5ACnAPn8oj",
+      "hash": "51cd82e9c38b3a34034c255864db12b3",
+      "remote_hash": "21a155346af8e9950740a5730e044ba1"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: wallet
+      POSTGRES_PASSWORD: wallet
+      POSTGRES_DB: wallet
+    ports: ["5433:5432"]
+    volumes:
+      - walletdata:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wallet"]
+      interval: 3s
+      retries: 20
+
+  # The wallet server (MCP + REST + ledger page on :3000). Everything else comes from env (see .env.example).
+  server:
+    build: ./server
+    environment:
+      DATABASE_URL: postgres://wallet:wallet@db:5432/wallet
+      VAULT_DIR: /vault
+      PUBLIC_URL: ${PUBLIC_URL:-http://localhost:3000}
+      OWNER_PASSPHRASE: ${OWNER_PASSPHRASE:?set OWNER_PASSPHRASE in your shell or .env}
+      MOCK_LINKEDIN: ${MOCK_LINKEDIN:-1}
+      MOCK_WEB: ${MOCK_WEB:-1}
+    volumes: ["vault:/vault"]
+    ports: ["3000:3000"]
+    depends_on:
+      db: { condition: service_healthy }
+
+volumes:
+  walletdata:
+  vault:
