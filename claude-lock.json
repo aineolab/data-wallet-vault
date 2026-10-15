@@ -9,9 +9,9 @@
     "./agents/normalizer.md": {
       "kind": "agent",
       "id": "agent_015DExDComxJS4VjFKqZbgWf",
-      "version": "1",
-      "hash": "33c31ca4ef2331b23bbb8b9199db052f",
-      "remote_hash": "216bde0c2e57f216b7003f2d4d019eb7"
+      "version": "3",
+      "hash": "2cbde3b6f042c8ee8367759a5c41c4d5",
+      "remote_hash": "f0a6f457619cb8407da2c77017b8b629"
     },
     "./environments/wallet-cloud.yaml": {
       "kind": "environment",

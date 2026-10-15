@@ -36,7 +36,9 @@ const STARTER_RUBRIC = `# Normalizer outcome rubric - starter, tune after the fi
 - Every fact posted to /v1/facts has provenance of the form conv_NNN#N that points at a real user message
 - Every fact's category is one of: work_profile, coding_preferences, shopping_preferences, personal_memory, health_finance_restricted
 - No fact, report line or summary contains a secret: nothing matching sk-, sk-ant-, sk-proj-, ghp_, xoxb-, AKIA, AIza, eyJ, a 13-19 digit number, or -----BEGIN
-- Facts are about Dana only; nobody else is the subject of a fact
+- Facts are about Dana only; nobody else is the subject of a fact (Dana's relationships count: "Dana's partner is called Sam")
+- Every fact is 5-12 words, one clause, starts with "Dana", and reuses the source's own nouns; no reasons, feelings or dates appended
+- Every user message that states a durable preference, role, habit, purchase intent, relationship or constraint produced exactly one fact (two only when it states two distinct things)
 - Every health, medication, money, mortgage, salary or insurance fact is categorised health_finance_restricted
 - All 30 conversations were read; /mnt/session/outputs/normalizer-report.json lists every skipped message with a reason
 - Every POST to /v1/facts returned 2xx, or is listed under post_failures with the status code
@@ -106,7 +108,7 @@ async function main() {
                   `${WALLET_URL}/v1/facts with raw_file_id "${RAW_FILE_ID}". Write the report to ` +
                   `/mnt/session/outputs/normalizer-report.json.`,
                 rubric: { type: 'text', content: STARTER_RUBRIC },
-                max_iterations: 3,
+                max_iterations: 1,
               },
             ],
           })
