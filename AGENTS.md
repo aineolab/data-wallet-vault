@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep wallet dashboard UI in src/components/wallet and REST types, fixtures, and queries in src/lib/wallet so presentation stays separate from the external API contract.
+- Wallet API calls execute in the browser with a session-only bearer token; no local server or database integration is needed for this external wallet dashboard.
+- Wallet tabs use URL search state and initial content uses the router Query cache so direct links and SSR remain consistent.
