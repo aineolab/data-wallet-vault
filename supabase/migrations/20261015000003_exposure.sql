@@ -3,7 +3,7 @@
 
 -- Identifiers the owner has verified as theirs. Scans may only use these.
 CREATE TABLE IF NOT EXISTS owner_identifiers (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tenant_id UUID NOT NULL REFERENCES tenants(id),
   user_id UUID NOT NULL REFERENCES users(id),
   kind TEXT NOT NULL CHECK (kind IN ('full_name','email','phone','username','city','employer')),
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS owner_identifiers (
 
 -- One row per place the owner's data was found.
 CREATE TABLE IF NOT EXISTS exposures (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tenant_id UUID NOT NULL REFERENCES tenants(id),
   user_id UUID NOT NULL REFERENCES users(id),
   url TEXT NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS exposures (
 --   SENT/ACKNOWLEDGED -> OVERDUE (past due_at) -> ESCALATED (complaint drafted to the data-protection authority)
 --   any -> REFUSED | WITHDRAWN
 CREATE TABLE IF NOT EXISTS privacy_requests (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tenant_id UUID NOT NULL REFERENCES tenants(id),
   user_id UUID NOT NULL REFERENCES users(id),
   exposure_id UUID NOT NULL REFERENCES exposures(id),

@@ -1,16 +1,15 @@
 -- Data Wallet — self-hosted schema (v0.1, hackathon slice of PRD §2.2)
 -- Single-user by default. tenant_id kept everywhere so multi-tenant is a config change later.
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE EXTENSION IF NOT EXISTS "vector" WITH SCHEMA extensions;  -- Supabase pre-creates `extensions` and keeps it on search_path
+CREATE EXTENSION IF NOT EXISTS "vector" WITH SCHEMA extensions;  -- qualified below: the CLI login role does not have `extensions` on search_path
 
 CREATE TABLE IF NOT EXISTS tenants (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS users (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tenant_id UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
   email TEXT NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -19,7 +18,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Append-only. Triggers below block UPDATE/DELETE except status/revoked_at on revoke.
 CREATE TABLE IF NOT EXISTS consent_grants (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tenant_id UUID NOT NULL REFERENCES tenants(id),
   user_id UUID NOT NULL REFERENCES users(id),
   direction TEXT NOT NULL CHECK (direction IN ('DATA_IN','DATA_OUT')),
@@ -32,7 +31,7 @@ CREATE TABLE IF NOT EXISTS consent_grants (
 );
 
 CREATE TABLE IF NOT EXISTS raw_vault_files (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tenant_id UUID NOT NULL REFERENCES tenants(id),
   user_id UUID NOT NULL REFERENCES users(id),
   consent_grant_id UUID NOT NULL REFERENCES consent_grants(id),
@@ -46,7 +45,7 @@ CREATE TABLE IF NOT EXISTS raw_vault_files (
 );
 
 CREATE TABLE IF NOT EXISTS canonical_profiles (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tenant_id UUID NOT NULL REFERENCES tenants(id),
   user_id UUID NOT NULL REFERENCES users(id) UNIQUE,
   schema_version TEXT NOT NULL DEFAULT '2026-10-15',
@@ -57,7 +56,7 @@ CREATE TABLE IF NOT EXISTS canonical_profiles (
 );
 
 CREATE TABLE IF NOT EXISTS canonical_memories (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tenant_id UUID NOT NULL REFERENCES tenants(id),
   user_id UUID NOT NULL REFERENCES users(id),
   raw_file_id UUID NOT NULL REFERENCES raw_vault_files(id) ON DELETE CASCADE,
@@ -69,12 +68,12 @@ CREATE TABLE IF NOT EXISTS canonical_memories (
   modality TEXT NOT NULL DEFAULT 'text',
   is_quarantined BOOLEAN NOT NULL DEFAULT FALSE,
   verified BOOLEAN NOT NULL DEFAULT FALSE,          -- set by the Verifier agent
-  embedding vector(1536),
+  embedding extensions.vector(1536),
   extracted_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS data_out_tokens (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tenant_id UUID NOT NULL REFERENCES tenants(id),
   user_id UUID NOT NULL REFERENCES users(id),
   consent_grant_id UUID NOT NULL REFERENCES consent_grants(id),
@@ -89,7 +88,7 @@ CREATE TABLE IF NOT EXISTS data_out_tokens (
 
 -- Append-only ledger. Every read, every revoke, every ship.
 CREATE TABLE IF NOT EXISTS egress_ledger (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tenant_id UUID NOT NULL REFERENCES tenants(id),
   user_id UUID NOT NULL REFERENCES users(id),
   token_id UUID REFERENCES data_out_tokens(id),

@@ -3,7 +3,7 @@
 --   REQUESTED -> AWAITING_ARCHIVE -> ARCHIVE_READY -> INGESTING -> AVAILABLE
 --   any non-terminal -> CANCELLED (consent revoked) | EXPIRED (download window passed) | FAILED (parse error, retries exhausted)
 CREATE TABLE IF NOT EXISTS source_jobs (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tenant_id UUID NOT NULL REFERENCES tenants(id),
   user_id UUID NOT NULL REFERENCES users(id),
   consent_grant_id UUID NOT NULL REFERENCES consent_grants(id),
