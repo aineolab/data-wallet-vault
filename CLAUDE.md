@@ -99,6 +99,20 @@ page, request the product, and mint a token in the OAuth Token Generator with sc
 Out-of-scope request → empty result + `SCOPE_RESTRICTED` notice + `SCOPE_BLOCKED` ledger row.
 Revoked token → HTTP 401 `WALLET_ACCESS_REVOKED`. A new grant on scopes covered by a shipped exclusive grant → `RESALE_BLOCKED`.
 
+## Independent evals on NYO (Claude builds, other models grade)
+Claude writes the code and runs the agents. Models on **NYO** (Tim's OpenAI-compatible gateway) do the grading that
+a fixed script can't, so the work never grades itself. `eval/judge.py`, env `NYO_BASE_URL` + `NYO_API_KEY`.
+| Job | Model | When |
+|---|---|---|
+| Fact precision audit (is each fact supported by its source?) | `glm-5.3` | every hill-climb iteration |
+| Same audit, final number for the pitch | `gpt-6-astra` (`FINAL=1`) | once, at the end |
+| GDPR draft quality (article, controller, no over-sharing) | `gpt-6-astra` | after exposure_flow passes |
+| New prompt injections for the red team | `deepseek-v4-pro` | once per wave; feed into `redteam.py` |
+| Image captions for media rows (feature 10) | `minicpm-v-4.5` | once |
+| Code review of `server/` scope + auth code | `kimi-k2.7-code` | before each wave's merge |
+Rules: **only synthetic seed data goes to NYO** (it may record requests). Never real user data, never tokens or keys.
+`gpt-6-astra` is ~10× the price of the others, so use it for final numbers only. Report which model produced each number.
+
 ## Exposure Finder + right-to-be-forgotten (feature 13)
 Find where the **owner's own** personal data appears online, show the sources, recommend a workflow per source,
 and draft GDPR requests: Art. 15 access ("send me what you hold"), Art. 17 erasure ("delete it"), opt-out forms,
