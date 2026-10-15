@@ -34,7 +34,7 @@ export function ConnectAgent({ url, ownerToken, isLive, onOpenConnections }: { u
     setMinting(true);
     try {
       const headers: Record<string, string> = { 'Content-Type': 'application/json', Accept: 'application/json' };
-      if (ownerToken) headers.Authorization = `Bearer ${ownerToken}`;
+      if (ownerToken) headers['Authorization'] = `Bearer ${ownerToken}`;
       const res = await fetch(`${validateWalletUrl(url)}/v1/tokens/issue`, { method: 'POST', headers, body: JSON.stringify({ consumer_name: name.trim(), consumer_type: 'AI_AGENT_MCP', scopes }), signal: AbortSignal.timeout(10000), cache: 'no-store' });
       if (!res.ok) throw new Error(res.status === 401 || res.status === 403 ? 'Owner token was not accepted. Check your token in Settings.' : `Token request failed (${res.status}).`);
       const body = await res.json() as { token?: string; access_token?: string; raw_token?: string };
