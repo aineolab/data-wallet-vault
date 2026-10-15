@@ -64,3 +64,14 @@ Delete the temporary `seed_fixture` rows before measuring (see `server/INTEGRATI
 against the answer key itself.
 
 Status on 15 Oct 2026: the Normalizer lane is still running its first scored pass; see `eval/RESULTS.md` once it lands.
+
+## Normalizer: how to run and score (feature 6)
+1. Setup once: `ant apply --yes agents/normalizer.md environments/wallet-cloud.yaml` (IDs land in `claude-lock.json`), a vault with an
+   `environment_variable` credential `WALLET_DATA_IN_TOKEN` (a DATA_IN token from `POST /v1/tokens/issue`, networking limited to the wallet host),
+   and in `server/.env`: `NORMALIZER_AGENT_ID`, `WALLET_ENV_ID`, `WALLET_VAULT_ID`, `WALLET_RAW_FILE_ID` (from `POST /v1/facts` with a `source`), `PUBLIC_URL`.
+2. `cd agents && npm install && npm run normalizer` uploads `seed/out/conversations.json`, smoke-tests `/health`, kicks off with an outcome rubric and
+   streams until done. The Console URL is printed. The report lands in `agents/out/normalizer-report.json`.
+3. Before scoring, quarantine the temporary fixture: `npm run sql -- "UPDATE canonical_memories SET is_quarantined = TRUE WHERE source_provider = 'seed_fixture'"`.
+4. Score: `DATABASE_URL=... python3 eval/score.py` (appends to `eval/RESULTS.md`). To re-run fairly, snapshot then clear the previous run:
+   `npm run dump -- runN "note"` then `npm run sql -- "DELETE FROM canonical_memories WHERE source_provider='normalizer'"`.
+   `/v1/facts` dedupes on (raw_file_id, provenance, fact), so a re-run without clearing only adds facts whose wording changed.
