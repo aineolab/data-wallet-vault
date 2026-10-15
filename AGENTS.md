@@ -8,3 +8,9 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Data Wallet rules for any coding agent (Lovable included)
+- Read `CLAUDE.md` first. It is the spec.
+- **Do not edit** `server/`, `supabase/`, `db/`, `seed/`, `eval/`, `agents/`. The Lovable app owns only `src/`, `public/` and root config.
+- The web app may call `server/` `/v1` read endpoints only. Never put a Supabase service key or any secret in client code.
+- Never enable Lovable Cloud for this project; the wallet uses its own Supabase project via `server/`.

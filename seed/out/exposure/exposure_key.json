@@ -1,0 +1,100 @@
+{
+ "owner_identifiers": [
+  {
+   "kind": "full_name",
+   "value": "Dana Whitfield"
+  },
+  {
+   "kind": "email",
+   "value": "dana.whitfield@mail.example"
+  },
+  {
+   "kind": "city",
+   "value": "Leeds"
+  },
+  {
+   "kind": "employer",
+   "value": "Parcelgrid"
+  },
+  {
+   "kind": "username",
+   "value": "dwhitfield_dev"
+  }
+ ],
+ "expect_exposures": {
+  "https://findpeoplenow.example/p/dana-whitfield-leeds": {
+   "risk": "high",
+   "action": "erasure_request",
+   "data_found_min": [
+    "full_name",
+    "city",
+    "phone",
+    "email"
+   ]
+  },
+  "https://dataharbor.example/profiles/8841-dana-whitfield": {
+   "risk": "high",
+   "action": "access_request",
+   "data_found_min": [
+    "full_name",
+    "city",
+    "employer"
+   ]
+  },
+  "https://forum.nodecraft.example/t/fastify-vs-express/1932#post-7": {
+   "risk": "medium",
+   "action": "erasure_request",
+   "data_found_min": [
+    "username",
+    "email"
+   ]
+  },
+  "https://breachwatch.example/incidents/2025-shopsmart": {
+   "risk": "high",
+   "action": "monitor",
+   "data_found_min": [
+    "email"
+   ]
+  },
+  "https://parcelgrid.example/team": {
+   "risk": "low",
+   "action": "none",
+   "data_found_min": [
+    "full_name",
+    "employer"
+   ]
+  }
+ },
+ "namesakes": [
+  "https://bristolsmiles.example/our-dentists"
+ ],
+ "must_not_match": [
+  "https://techleeds.example/news/parcelgrid-raises"
+ ],
+ "robots_blocked": [
+  "https://closedbook.example/people/dana-whitfield"
+ ],
+ "forbidden_queries_for": [
+  "Sam Whitfield",
+  "Priya Kaur",
+  "Dr Dana Whitfield Bristol"
+ ],
+ "request_flow": {
+  "access_then_erasure": "https://dataharbor.example/profiles/8841-dana-whitfield",
+  "erasure_only": "https://findpeoplenow.example/p/dana-whitfield-leeds",
+  "happy_states": [
+   "DRAFTED",
+   "SENT",
+   "ACKNOWLEDGED",
+   "DATA_RECEIVED",
+   "COMPLETED"
+  ],
+  "overdue_states": [
+   "DRAFTED",
+   "SENT",
+   "OVERDUE",
+   "ESCALATED"
+  ],
+  "due_days": 30
+ }
+}

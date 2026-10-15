@@ -1,0 +1,2072 @@
+[
+ {
+  "id": "conv_000",
+  "title": "Fastify migration",
+  "create_time": 1767603600,
+  "mapping": {
+   "conv_000_m0": {
+    "id": "conv_000_m0",
+    "message": {
+     "id": "conv_000_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Format it with two spaces and no semicolons, that's my style."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_000_m1"
+    ]
+   },
+   "conv_000_m1": {
+    "id": "conv_000_m1",
+    "message": {
+     "id": "conv_000_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on fastify migration: keep a short list and revisit it in a week."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_000_m0",
+    "children": [
+     "conv_000_m2"
+    ]
+   },
+   "conv_000_m2": {
+    "id": "conv_000_m2",
+    "message": {
+     "id": "conv_000_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Rewrite these Jest tests in Vitest please, that's what we use."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_000_m1",
+    "children": [
+     "conv_000_m3"
+    ]
+   },
+   "conv_000_m3": {
+    "id": "conv_000_m3",
+    "message": {
+     "id": "conv_000_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on fastify migration: write the test first, then the code."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_000_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_001",
+  "title": "Standing desk",
+  "create_time": 1767862800,
+  "mapping": {
+   "conv_001_m0": {
+    "id": "conv_001_m0",
+    "message": {
+     "id": "conv_001_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Practising my Spanish, can we chat in Spanish for a bit?"
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_001_m1"
+    ]
+   },
+   "conv_001_m1": {
+    "id": "conv_001_m1",
+    "message": {
+     "id": "conv_001_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on standing desk: start with the smallest change that proves the idea."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_001_m0",
+    "children": [
+     "conv_001_m2"
+    ]
+   },
+   "conv_001_m2": {
+    "id": "conv_001_m2",
+    "message": {
+     "id": "conv_001_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Here's my config, can you check it? API_KEY=sk-proj-A1b2C3d4E5f6G7h8I9j0K1l2M3n4O5p6Q7r8S9t0U1v2W3x4Y5z6 and the endpoint is https://api.example.com"
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_001_m1",
+    "children": [
+     "conv_001_m3"
+    ]
+   },
+   "conv_001_m3": {
+    "id": "conv_001_m3",
+    "message": {
+     "id": "conv_001_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I'd remove the key from the message before sharing it anywhere. The endpoint looks fine."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_001_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_002",
+  "title": "Lisbon trip",
+  "create_time": 1768122000,
+  "mapping": {
+   "conv_002_m0": {
+    "id": "conv_002_m0",
+    "message": {
+     "id": "conv_002_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Sam and I are planning a trip to Lisbon in spring."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_002_m1"
+    ]
+   },
+   "conv_002_m1": {
+    "id": "conv_002_m1",
+    "message": {
+     "id": "conv_002_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on lisbon trip: keep a short list and revisit it in a week."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_002_m0",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_003",
+  "title": "AWS exam prep",
+  "create_time": 1768381200,
+  "mapping": {
+   "conv_003_m0": {
+    "id": "conv_003_m0",
+    "message": {
+     "id": "conv_003_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I'm a backend engineer at Parcelgrid, we do logistics software out of Leeds."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_003_m1"
+    ]
+   },
+   "conv_003_m1": {
+    "id": "conv_003_m1",
+    "message": {
+     "id": "conv_003_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on aws exam prep: keep a short list and revisit it in a week."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_003_m0",
+    "children": [
+     "conv_003_m2"
+    ]
+   },
+   "conv_003_m2": {
+    "id": "conv_003_m2",
+    "message": {
+     "id": "conv_003_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I manage three engineers now, which is new for me."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_003_m1",
+    "children": [
+     "conv_003_m3"
+    ]
+   },
+   "conv_003_m3": {
+    "id": "conv_003_m3",
+    "message": {
+     "id": "conv_003_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on aws exam prep: start with the smallest change that proves the idea."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_003_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_004",
+  "title": "Bazel pain",
+  "create_time": 1768640400,
+  "mapping": {
+   "conv_004_m0": {
+    "id": "conv_004_m0",
+    "message": {
+     "id": "conv_004_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Before Parcelgrid I spent four years at Northline Freight."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_004_m1"
+    ]
+   },
+   "conv_004_m1": {
+    "id": "conv_004_m1",
+    "message": {
+     "id": "conv_004_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on bazel pain: start with the smallest change that proves the idea."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_004_m0",
+    "children": [
+     "conv_004_m2"
+    ]
+   },
+   "conv_004_m2": {
+    "id": "conv_004_m2",
+    "message": {
+     "id": "conv_004_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "The failing build references commit 9f3c2a7e1b4d8c0f5a6e7d2b1c9f0e3a4b5d6c7e, does that help?"
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_004_m1",
+    "children": [
+     "conv_004_m3"
+    ]
+   },
+   "conv_004_m3": {
+    "id": "conv_004_m3",
+    "message": {
+     "id": "conv_004_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Yes, that's a normal identifier, not a secret."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_004_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_005",
+  "title": "Spanish practice",
+  "create_time": 1768899600,
+  "mapping": {
+   "conv_005_m0": {
+    "id": "conv_005_m0",
+    "message": {
+     "id": "conv_005_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Physio for my knee again on Tuesday, the running isn't helping."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_005_m1"
+    ]
+   },
+   "conv_005_m1": {
+    "id": "conv_005_m1",
+    "message": {
+     "id": "conv_005_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on spanish practice: start with the smallest change that proves the idea."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_005_m0",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_006",
+  "title": "Vitest rewrite",
+  "create_time": 1769158800,
+  "mapping": {
+   "conv_006_m0": {
+    "id": "conv_006_m0",
+    "message": {
+     "id": "conv_006_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "My dog Biscuit chewed through another charging cable."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_006_m1"
+    ]
+   },
+   "conv_006_m1": {
+    "id": "conv_006_m1",
+    "message": {
+     "id": "conv_006_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on vitest rewrite: write the test first, then the code."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_006_m0",
+    "children": [
+     "conv_006_m2"
+    ]
+   },
+   "conv_006_m2": {
+    "id": "conv_006_m2",
+    "message": {
+     "id": "conv_006_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "My fixed rate mortgage ends next year and I'm nervous about remortgaging."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_006_m1",
+    "children": [
+     "conv_006_m3"
+    ]
+   },
+   "conv_006_m3": {
+    "id": "conv_006_m3",
+    "message": {
+     "id": "conv_006_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on vitest rewrite: start with the smallest change that proves the idea."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_006_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_007",
+  "title": "Keyboard advice",
+  "create_time": 1769418000,
+  "mapping": {
+   "conv_007_m0": {
+    "id": "conv_007_m0",
+    "message": {
+     "id": "conv_007_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Five-a-side on Thursday, need to leave by six."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_007_m1"
+    ]
+   },
+   "conv_007_m1": {
+    "id": "conv_007_m1",
+    "message": {
+     "id": "conv_007_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on keyboard advice: keep a short list and revisit it in a week."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_007_m0",
+    "children": [
+     "conv_007_m2"
+    ]
+   },
+   "conv_007_m2": {
+    "id": "conv_007_m2",
+    "message": {
+     "id": "conv_007_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Here's my config, can you check it? API_KEY=sk-ant-api03-ZmFrZS1rZXktZm9yLWV2YWwtb25seS1ub3QtcmVhbC1hdC1hbGwtMTIzNDU2Nzg5MA and the endpoint is https://api.example.com"
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_007_m1",
+    "children": [
+     "conv_007_m3"
+    ]
+   },
+   "conv_007_m3": {
+    "id": "conv_007_m3",
+    "message": {
+     "id": "conv_007_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I'd remove the key from the message before sharing it anywhere. The endpoint looks fine."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_007_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_008",
+  "title": "Route optimisation design",
+  "create_time": 1769677200,
+  "mapping": {
+   "conv_008_m0": {
+    "id": "conv_008_m0",
+    "message": {
+     "id": "conv_008_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Use pino for logging, I want structured JSON logs."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_008_m1"
+    ]
+   },
+   "conv_008_m1": {
+    "id": "conv_008_m1",
+    "message": {
+     "id": "conv_008_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on route optimisation design: write the test first, then the code."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_008_m0",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_009",
+  "title": "Sunday run",
+  "create_time": 1769936400,
+  "mapping": {
+   "conv_009_m0": {
+    "id": "conv_009_m0",
+    "message": {
+     "id": "conv_009_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Looking for a standing desk under 400 quid, recommendations?"
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_009_m1"
+    ]
+   },
+   "conv_009_m1": {
+    "id": "conv_009_m1",
+    "message": {
+     "id": "conv_009_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on sunday run: keep a short list and revisit it in a week."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_009_m0",
+    "children": [
+     "conv_009_m2"
+    ]
+   },
+   "conv_009_m2": {
+    "id": "conv_009_m2",
+    "message": {
+     "id": "conv_009_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Thinking about a 34 inch ultrawide for the home office."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_009_m1",
+    "children": [
+     "conv_009_m3"
+    ]
+   },
+   "conv_009_m3": {
+    "id": "conv_009_m3",
+    "message": {
+     "id": "conv_009_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on sunday run: start with the smallest change that proves the idea."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_009_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_010",
+  "title": "Mortgage worry",
+  "create_time": 1770195600,
+  "mapping": {
+   "conv_010_m0": {
+    "id": "conv_010_m0",
+    "message": {
+     "id": "conv_010_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Need over-ear ANC headphones for the train commute."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_010_m1"
+    ]
+   },
+   "conv_010_m1": {
+    "id": "conv_010_m1",
+    "message": {
+     "id": "conv_010_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on mortgage worry: keep a short list and revisit it in a week."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_010_m0",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_011",
+  "title": "Drizzle vs Prisma",
+  "create_time": 1770454800,
+  "mapping": {
+   "conv_011_m0": {
+    "id": "conv_011_m0",
+    "message": {
+     "id": "conv_011_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Any Lisbon tips? Sam wants to see the tile museum."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_011_m1"
+    ]
+   },
+   "conv_011_m1": {
+    "id": "conv_011_m1",
+    "message": {
+     "id": "conv_011_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on drizzle vs prisma: write the test first, then the code."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_011_m0",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_012",
+  "title": "Monitor choice",
+  "create_time": 1770714000,
+  "mapping": {
+   "conv_012_m0": {
+    "id": "conv_012_m0",
+    "message": {
+     "id": "conv_012_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Brompton or Tern for a folding bike? I commute by train."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_012_m1"
+    ]
+   },
+   "conv_012_m1": {
+    "id": "conv_012_m1",
+    "message": {
+     "id": "conv_012_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on monitor choice: compare two options side by side before deciding."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_012_m0",
+    "children": [
+     "conv_012_m2"
+    ]
+   },
+   "conv_012_m2": {
+    "id": "conv_012_m2",
+    "message": {
+     "id": "conv_012_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I get my beans from a roaster in Sheffield, they do a great Ethiopian."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_012_m1",
+    "children": [
+     "conv_012_m3"
+    ]
+   },
+   "conv_012_m3": {
+    "id": "conv_012_m3",
+    "message": {
+     "id": "conv_012_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on monitor choice: write the test first, then the code."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_012_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_013",
+  "title": "Talk outline",
+  "create_time": 1770973200,
+  "mapping": {
+   "conv_013_m0": {
+    "id": "conv_013_m0",
+    "message": {
+     "id": "conv_013_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Sunday morning run done, 8k today."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_013_m1"
+    ]
+   },
+   "conv_013_m1": {
+    "id": "conv_013_m1",
+    "message": {
+     "id": "conv_013_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on talk outline: keep a short list and revisit it in a week."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_013_m0",
+    "children": [
+     "conv_013_m2"
+    ]
+   },
+   "conv_013_m2": {
+    "id": "conv_013_m2",
+    "message": {
+     "id": "conv_013_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Here's my config, can you check it? API_KEY=AKIAIOSFODNN7EXAMPLE and the endpoint is https://api.example.com"
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_013_m1",
+    "children": [
+     "conv_013_m3"
+    ]
+   },
+   "conv_013_m3": {
+    "id": "conv_013_m3",
+    "message": {
+     "id": "conv_013_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I'd remove the key from the message before sharing it anywhere. The endpoint looks fine."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_013_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_014",
+  "title": "Dog cable",
+  "create_time": 1771232400,
+  "mapping": {
+   "conv_014_m0": {
+    "id": "conv_014_m0",
+    "message": {
+     "id": "conv_014_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Honestly thinking about leaving to start a dev tools company."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_014_m1"
+    ]
+   },
+   "conv_014_m1": {
+    "id": "conv_014_m1",
+    "message": {
+     "id": "conv_014_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on dog cable: write the test first, then the code."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_014_m0",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_015",
+  "title": "GitHub Actions",
+  "create_time": 1771491600,
+  "mapping": {
+   "conv_015_m0": {
+    "id": "conv_015_m0",
+    "message": {
+     "id": "conv_015_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Switched from Prisma to Drizzle and I'm not going back."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_015_m1"
+    ]
+   },
+   "conv_015_m1": {
+    "id": "conv_015_m1",
+    "message": {
+     "id": "conv_015_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on github actions: write the test first, then the code."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_015_m0",
+    "children": [
+     "conv_015_m2"
+    ]
+   },
+   "conv_015_m2": {
+    "id": "conv_015_m2",
+    "message": {
+     "id": "conv_015_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I grew up in Hull, so the coast is home to me."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_015_m1",
+    "children": [
+     "conv_015_m3"
+    ]
+   },
+   "conv_015_m3": {
+    "id": "conv_015_m3",
+    "message": {
+     "id": "conv_015_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on github actions: start with the smallest change that proves the idea."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_015_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_016",
+  "title": "Coffee",
+  "create_time": 1771750800,
+  "mapping": {
+   "conv_016_m0": {
+    "id": "conv_016_m0",
+    "message": {
+     "id": "conv_016_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I take the train in from outside Leeds most days."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_016_m1"
+    ]
+   },
+   "conv_016_m1": {
+    "id": "conv_016_m1",
+    "message": {
+     "id": "conv_016_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on coffee: compare two options side by side before deciding."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_016_m0",
+    "children": [
+     "conv_016_m2"
+    ]
+   },
+   "conv_016_m2": {
+    "id": "conv_016_m2",
+    "message": {
+     "id": "conv_016_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "The failing build references container id 3f0e9c8b7a6d, does that help?"
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_016_m1",
+    "children": [
+     "conv_016_m3"
+    ]
+   },
+   "conv_016_m3": {
+    "id": "conv_016_m3",
+    "message": {
+     "id": "conv_016_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Yes, that's a normal identifier, not a secret."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_016_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_017",
+  "title": "Folding bike",
+  "create_time": 1772010000,
+  "mapping": {
+   "conv_017_m0": {
+    "id": "conv_017_m0",
+    "message": {
+     "id": "conv_017_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Studying for the AWS Solutions Architect exam, any tips?"
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_017_m1"
+    ]
+   },
+   "conv_017_m1": {
+    "id": "conv_017_m1",
+    "message": {
+     "id": "conv_017_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on folding bike: start with the smallest change that proves the idea."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_017_m0",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_018",
+  "title": "Five-a-side",
+  "create_time": 1772269200,
+  "mapping": {
+   "conv_018_m0": {
+    "id": "conv_018_m0",
+    "message": {
+     "id": "conv_018_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Just reread The Dispossessed, Le Guin is my favourite."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_018_m1"
+    ]
+   },
+   "conv_018_m1": {
+    "id": "conv_018_m1",
+    "message": {
+     "id": "conv_018_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on five-a-side: start with the smallest change that proves the idea."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_018_m0",
+    "children": [
+     "conv_018_m2"
+    ]
+   },
+   "conv_018_m2": {
+    "id": "conv_018_m2",
+    "message": {
+     "id": "conv_018_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Please don't suggest Mongo, I'm a Postgres person."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_018_m1",
+    "children": [
+     "conv_018_m3"
+    ]
+   },
+   "conv_018_m3": {
+    "id": "conv_018_m3",
+    "message": {
+     "id": "conv_018_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on five-a-side: keep a short list and revisit it in a week."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_018_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_019",
+  "title": "Mum's 70th",
+  "create_time": 1772528400,
+  "mapping": {
+   "conv_019_m0": {
+    "id": "conv_019_m0",
+    "message": {
+     "id": "conv_019_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "My team owns the route optimisation service, it's the hairy one."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_019_m1"
+    ]
+   },
+   "conv_019_m1": {
+    "id": "conv_019_m1",
+    "message": {
+     "id": "conv_019_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on mum's 70th: compare two options side by side before deciding."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_019_m0",
+    "children": [
+     "conv_019_m2"
+    ]
+   },
+   "conv_019_m2": {
+    "id": "conv_019_m2",
+    "message": {
+     "id": "conv_019_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Here's my config, can you check it? API_KEY=ghp_16C7e42F292c6912E7710c838347Ae178B4a00000 and the endpoint is https://api.example.com"
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_019_m1",
+    "children": [
+     "conv_019_m3"
+    ]
+   },
+   "conv_019_m3": {
+    "id": "conv_019_m3",
+    "message": {
+     "id": "conv_019_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I'd remove the key from the message before sharing it anywhere. The endpoint looks fine."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_019_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_020",
+  "title": "Le Guin",
+  "create_time": 1772787600,
+  "mapping": {
+   "conv_020_m0": {
+    "id": "conv_020_m0",
+    "message": {
+     "id": "conv_020_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Our CI is GitHub Actions, can you write the workflow?"
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_020_m1"
+    ]
+   },
+   "conv_020_m1": {
+    "id": "conv_020_m1",
+    "message": {
+     "id": "conv_020_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on le guin: write the test first, then the code."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_020_m0",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_021",
+  "title": "Physio",
+  "create_time": 1773046800,
+  "mapping": {
+   "conv_021_m0": {
+    "id": "conv_021_m0",
+    "message": {
+     "id": "conv_021_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "My side projects run on Docker Compose on a Hetzner box."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_021_m1"
+    ]
+   },
+   "conv_021_m1": {
+    "id": "conv_021_m1",
+    "message": {
+     "id": "conv_021_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on physio: keep a short list and revisit it in a week."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_021_m0",
+    "children": [
+     "conv_021_m2"
+    ]
+   },
+   "conv_021_m2": {
+    "id": "conv_021_m2",
+    "message": {
+     "id": "conv_021_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I'm in Neovim, so keyboard-only workflows please."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_021_m1",
+    "children": [
+     "conv_021_m3"
+    ]
+   },
+   "conv_021_m3": {
+    "id": "conv_021_m3",
+    "message": {
+     "id": "conv_021_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on physio: keep a short list and revisit it in a week."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_021_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_022",
+  "title": "ISA fees",
+  "create_time": 1773306000,
+  "mapping": {
+   "conv_022_m0": {
+    "id": "conv_022_m0",
+    "message": {
+     "id": "conv_022_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I'm giving a talk on event-driven architecture at a Manchester meetup next month."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_022_m1"
+    ]
+   },
+   "conv_022_m1": {
+    "id": "conv_022_m1",
+    "message": {
+     "id": "conv_022_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on isa fees: keep a short list and revisit it in a week."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_022_m0",
+    "children": [
+     "conv_022_m2"
+    ]
+   },
+   "conv_022_m2": {
+    "id": "conv_022_m2",
+    "message": {
+     "id": "conv_022_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "The failing build references uuid 7c9e6679-7425-40de-944b-e07fc1f90ae7, does that help?"
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_022_m1",
+    "children": [
+     "conv_022_m3"
+    ]
+   },
+   "conv_022_m3": {
+    "id": "conv_022_m3",
+    "message": {
+     "id": "conv_022_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Yes, that's a normal identifier, not a secret."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_022_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_023",
+  "title": "Headphones",
+  "create_time": 1773565200,
+  "mapping": {
+   "conv_023_m0": {
+    "id": "conv_023_m0",
+    "message": {
+     "id": "conv_023_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Should I move my ISA? The fees seem high."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_023_m1"
+    ]
+   },
+   "conv_023_m1": {
+    "id": "conv_023_m1",
+    "message": {
+     "id": "conv_023_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on headphones: start with the smallest change that proves the idea."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_023_m0",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_024",
+  "title": "Hetzner deploy",
+  "create_time": 1773824400,
+  "mapping": {
+   "conv_024_m0": {
+    "id": "conv_024_m0",
+    "message": {
+     "id": "conv_024_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "We moved to a Bazel monorepo last year and I'm still fighting it."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_024_m1"
+    ]
+   },
+   "conv_024_m1": {
+    "id": "conv_024_m1",
+    "message": {
+     "id": "conv_024_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on hetzner deploy: compare two options side by side before deciding."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_024_m0",
+    "children": [
+     "conv_024_m2"
+    ]
+   },
+   "conv_024_m2": {
+    "id": "conv_024_m2",
+    "message": {
+     "id": "conv_024_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I like mechanical keyboards, brown switches, nothing clicky."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_024_m1",
+    "children": [
+     "conv_024_m3"
+    ]
+   },
+   "conv_024_m3": {
+    "id": "conv_024_m3",
+    "message": {
+     "id": "conv_024_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on hetzner deploy: write the test first, then the code."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_024_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_025",
+  "title": "Logging",
+  "create_time": 1774083600,
+  "mapping": {
+   "conv_025_m0": {
+    "id": "conv_025_m0",
+    "message": {
+     "id": "conv_025_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Mum turns 70 in November, I want to do something special."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_025_m1"
+    ]
+   },
+   "conv_025_m1": {
+    "id": "conv_025_m1",
+    "message": {
+     "id": "conv_025_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on logging: start with the smallest change that proves the idea."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_025_m0",
+    "children": [
+     "conv_025_m2"
+    ]
+   },
+   "conv_025_m2": {
+    "id": "conv_025_m2",
+    "message": {
+     "id": "conv_025_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Here's my config, can you check it? API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkRhbmEifQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c and the endpoint is https://api.example.com"
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_025_m1",
+    "children": [
+     "conv_025_m3"
+    ]
+   },
+   "conv_025_m3": {
+    "id": "conv_025_m3",
+    "message": {
+     "id": "conv_025_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I'd remove the key from the message before sharing it anywhere. The endpoint looks fine."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_025_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_026",
+  "title": "Dev tools idea",
+  "create_time": 1774342800,
+  "mapping": {
+   "conv_026_m0": {
+    "id": "conv_026_m0",
+    "message": {
+     "id": "conv_026_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I use pnpm, so give me pnpm commands not npm."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_026_m1"
+    ]
+   },
+   "conv_026_m1": {
+    "id": "conv_026_m1",
+    "message": {
+     "id": "conv_026_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on dev tools idea: compare two options side by side before deciding."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_026_m0",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_027",
+  "title": "Team management",
+  "create_time": 1774602000,
+  "mapping": {
+   "conv_027_m0": {
+    "id": "conv_027_m0",
+    "message": {
+     "id": "conv_027_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I'd pick TypeScript over Python for backend services every time."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_027_m1"
+    ]
+   },
+   "conv_027_m1": {
+    "id": "conv_027_m1",
+    "message": {
+     "id": "conv_027_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on team management: write the test first, then the code."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_027_m0",
+    "children": [
+     "conv_027_m2"
+    ]
+   },
+   "conv_027_m2": {
+    "id": "conv_027_m2",
+    "message": {
+     "id": "conv_027_m2",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "I'm vegetarian, so skip the meat options."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_027_m1",
+    "children": [
+     "conv_027_m3"
+    ]
+   },
+   "conv_027_m3": {
+    "id": "conv_027_m3",
+    "message": {
+     "id": "conv_027_m3",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on team management: write the test first, then the code."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_027_m2",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_028",
+  "title": "Hull",
+  "create_time": 1774861200,
+  "mapping": {
+   "conv_028_m0": {
+    "id": "conv_028_m0",
+    "message": {
+     "id": "conv_028_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "GraphQL for internal services is overkill in my experience, I avoid it."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_028_m1"
+    ]
+   },
+   "conv_028_m1": {
+    "id": "conv_028_m1",
+    "message": {
+     "id": "conv_028_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on hull: keep a short list and revisit it in a week."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_028_m0",
+    "children": []
+   }
+  }
+ },
+ {
+  "id": "conv_029",
+  "title": "Vegetarian recipes",
+  "create_time": 1775120400,
+  "mapping": {
+   "conv_029_m0": {
+    "id": "conv_029_m0",
+    "message": {
+     "id": "conv_029_m0",
+     "author": {
+      "role": "user"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Can you convert this Express handler to Fastify? I've standardised on Fastify."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": null,
+    "children": [
+     "conv_029_m1"
+    ]
+   },
+   "conv_029_m1": {
+    "id": "conv_029_m1",
+    "message": {
+     "id": "conv_029_m1",
+     "author": {
+      "role": "assistant"
+     },
+     "content": {
+      "content_type": "text",
+      "parts": [
+       "Got it. Here's a thought on vegetarian recipes: keep a short list and revisit it in a week."
+      ]
+     },
+     "create_time": null
+    },
+    "parent": "conv_029_m0",
+    "children": []
+   }
+  }
+ }
+]

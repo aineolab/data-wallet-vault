@@ -1,0 +1,31 @@
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: wallet
+      POSTGRES_PASSWORD: wallet
+      POSTGRES_DB: wallet
+    ports: ["5433:5432"]
+    volumes:
+      - walletdata:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wallet"]
+      interval: 3s
+      retries: 20
+
+  # The wallet server (MCP over stdio for Claude Desktop, REST + ledger page on :3000).
+  # Built by Lane D. Uncomment once server/ exists.
+  # server:
+  #   build: ./server
+  #   environment:
+  #     DATABASE_URL: postgres://wallet:wallet@db:5432/wallet
+  #     VAULT_DIR: /vault
+  #   volumes: ["vault:/vault"]
+  #   ports: ["3000:3000"]
+  #   depends_on:
+  #     db: { condition: service_healthy }
+
+volumes:
+  walletdata:
+  vault:
