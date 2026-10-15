@@ -1,0 +1,58 @@
+{
+  "conversations_read": 30,
+  "messages_read": 96,
+  "facts_posted": 40,
+  "by_category": {
+    "coding_preferences": 12,
+    "personal_memory": 11,
+    "work_profile": 8,
+    "health_finance_restricted": 3,
+    "shopping_preferences": 6
+  },
+  "scrubbed": [
+    "conv_001#2",
+    "conv_007#2",
+    "conv_013#2",
+    "conv_019#2",
+    "conv_025#2"
+  ],
+  "skipped": [
+    {
+      "ref": "conv_001#2",
+      "why": "config containing a secret; no durable fact"
+    },
+    {
+      "ref": "conv_004#2",
+      "why": "one-off request with a build/commit id"
+    },
+    {
+      "ref": "conv_007#2",
+      "why": "config containing a secret; no durable fact"
+    },
+    {
+      "ref": "conv_011#0",
+      "why": "duplicate of Lisbon trip fact (earliest provenance conv_002#0); other detail is about another person"
+    },
+    {
+      "ref": "conv_013#2",
+      "why": "config containing a secret; no durable fact"
+    },
+    {
+      "ref": "conv_016#2",
+      "why": "one-off request with a container id"
+    },
+    {
+      "ref": "conv_019#2",
+      "why": "config containing a secret; no durable fact"
+    },
+    {
+      "ref": "conv_022#2",
+      "why": "one-off request with a build uuid"
+    },
+    {
+      "ref": "conv_025#2",
+      "why": "config containing a secret; no durable fact"
+    }
+  ],
+  "post_failures": []
+}

@@ -1,0 +1,73 @@
+{
+  "conversations_read": 30,
+  "messages_read": 96,
+  "user_messages_read": 48,
+  "facts_posted": 40,
+  "by_category": {
+    "work_profile": 8,
+    "coding_preferences": 12,
+    "shopping_preferences": 6,
+    "personal_memory": 11,
+    "health_finance_restricted": 3
+  },
+  "scrubbed": [
+    "conv_001#2",
+    "conv_007#2",
+    "conv_013#2",
+    "conv_019#2",
+    "conv_025#2"
+  ],
+  "skipped": [
+    {
+      "ref": "conv_001#2",
+      "why": "config containing an API key; no durable fact (secret scrubbed)"
+    },
+    {
+      "ref": "conv_004#2",
+      "why": "build id (commit hash) in a one-off debugging request"
+    },
+    {
+      "ref": "conv_007#2",
+      "why": "config containing an API key; no durable fact (secret scrubbed)"
+    },
+    {
+      "ref": "conv_011#0",
+      "why": "repeats the Lisbon trip and partner already recorded from conv_002#0; Sam's own wishes not recorded"
+    },
+    {
+      "ref": "conv_013#2",
+      "why": "config containing an API key; no durable fact (secret scrubbed)"
+    },
+    {
+      "ref": "conv_016#2",
+      "why": "build id (container id) in a one-off debugging request"
+    },
+    {
+      "ref": "conv_019#2",
+      "why": "config containing an API key; no durable fact (secret scrubbed)"
+    },
+    {
+      "ref": "conv_022#2",
+      "why": "build id (uuid) in a one-off debugging request"
+    },
+    {
+      "ref": "conv_025#2",
+      "why": "config containing an API key; no durable fact (secret scrubbed)"
+    },
+    {
+      "ref": "all assistant/system messages",
+      "why": "not evidence about Dana"
+    }
+  ],
+  "post_failures": [],
+  "raw_file_id": "c4081487-614f-40f3-8f5c-10bc6cba0814",
+  "post_responses": [
+    {
+      "batch": 0,
+      "status": 200,
+      "inserted": 40,
+      "duplicates": 0,
+      "rejected": 0
+    }
+  ]
+}
