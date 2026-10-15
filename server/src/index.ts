@@ -8,6 +8,7 @@ import { config, publicUrl } from './config.js'
 import { query } from './db.js'
 import v1 from './v1/index.js'
 import mcp from './mcp/index.js'
+import oauth from './oauth/index.js'
 
 const app = new Hono()
 
@@ -59,17 +60,8 @@ app.get('/health', async (c) => {
   }
 })
 
-// OAuth discovery (CLAUDE.md "OAuth"): unauthenticated /mcp points clients at the protected-resource metadata.
-app.get('/.well-known/oauth-protected-resource', (c) => {
-  const base = publicUrl(c.req.url)
-  return c.json({
-    resource: `${base}/mcp`,
-    authorization_servers: [base],
-    bearer_methods_supported: ['header'],
-    scopes_supported: ['work_profile', 'coding_preferences', 'shopping_preferences', 'personal_memory', 'offline_access'],
-  })
-})
-
+// OAuth server + discovery (CLAUDE.md "OAuth"): /.well-known/*, /register, /authorize, /token.
+app.route('/', oauth)
 app.route('/mcp', mcp)
 app.route('/v1', v1)
 
