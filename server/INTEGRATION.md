@@ -55,3 +55,23 @@ OWNER tokens should grant all five scopes.
 Ledger operations this lane writes (all accepted by `LedgerOperation`'s open string type): `FACTS_INGESTED` (consumer `linkedin_mock`/`linkedin`),
 `CONSENT_REVOKED`, `LINKEDIN_DRIFT_CHECK`, `LINKEDIN_DRIFT_APPLIED`. Storage bucket `vault` is created on first use (service role).
 Dependency added to `server/package.json`: `fflate` (zip parsing).
+
+### normalizer lane (branch `lane-normalizer`) — one request for the wallet-api lane's file, notes for all
+1. **Request (wallet.ts, not core): exempt `DATA_IN_AGENT` from the resale guard in `POST /v1/tokens/issue`.**
+   The redteam run leaves `buyer_acme` holding a SHIPPED exclusive grant on `shopping_preferences`, so issuing the
+   Normalizer's DATA_IN token with all five scopes now returns `409 RESALE_BLOCKED`. A DATA_IN agent deposits data
+   into the wallet; it never reads it, so it is not a resale. Suggested one-line change at the guard:
+   `consumerType === 'OWNER' || consumerType === 'DATA_IN_AGENT' ? { rows: [] } : await query(...)`.
+   Until then the Normalizer token is issued without `shopping_preferences`; facts in that category are still
+   accepted by `/v1/facts` (it validates categories against `isScope`, not the token's scopes), so nothing is lost.
+2. `POST /v1/facts` (requireDataIn; demo mode = owner). Body: a bare array or `{facts:[...], source?, source_provider?, raw_file_id?}`.
+   Item: `{fact, category, confidence?, provenance, raw_file_id?, modality?}`. Response `{inserted, duplicates, rejected:[{index, reason}], quarantined, raw_file_id, source_file?}`, always 200
+   (per-item problems are in `rejected`). A fact that contains a secret is **dropped, never stored redacted** (score.py's
+   benign check keys off the literal `[REDACTED` appearing anywhere in canonical_memories). Dedupe on (raw_file_id, provenance, fact).
+   `source: {kind:'CHATGPT_EXPORT', sha256, storage_uri?}` upserts the `raw_vault_files` row (UNIQUE on sha256) under the caller's
+   grant, or under a DATA_IN grant with counterparty `normalizer` in demo mode, and returns its id. Ledger: one `FACTS_INGESTED` row per call.
+3. `server/src/scrub.ts`: `scrub(text) -> {clean, hits}` and `containsSecret(text)`; vitest `src/scrub.test.ts` checks every answer-key
+   planted secret is caught and every benign identifier survives. Other lanes may import it (pure, no I/O).
+4. Before `eval/score.py`: `UPDATE canonical_memories SET is_quarantined = TRUE WHERE source_provider = 'seed_fixture'`
+   (`cd agents && npm run sql -- "<sql>"`). Quarantined rows are not "served" by the scorer, so this is equivalent to the DELETE
+   the wallet-api lane suggested, but reversible.
